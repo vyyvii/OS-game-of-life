@@ -1,2 +1,2 @@
-# OS-game-of-life
-Do you want play on the game of life we create an OS where you only can play in game of life
+# OS – Game of Life
+Do you want to play the Game of Life? We created an OS where you can only play the Game of Life.
