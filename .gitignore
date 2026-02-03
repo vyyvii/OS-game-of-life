@@ -1,6 +1,11 @@
 # Build outputs
 *.bin
 *.o
+*.xz
+*.elf
 
 # vscode config
 .vscode
+gcc-13.2.0
+build-binutils
+binutils-2.42
