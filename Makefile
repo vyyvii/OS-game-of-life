@@ -1,8 +1,7 @@
 # MAKEFILE FOR OS-GAME OF LIFE
 
-.phony: install_base install_dependencies install_binutils install_gcc \
-	install_and_config_all compile_boot compile_kernel run_qemu \
-	update_repo config_repo clean fclean all re
+.phony: install_base install_and_config_all compile_boot compile_kernel \
+	run_qemu update_repo clean fclean all re
 
 # ─────────────────────────────────────────────────────────────
 # NAME
@@ -12,7 +11,7 @@ NAME		= os-image
 # ─────────────────────────────────────────────────────────────
 # TOOLS
 # ─────────────────────────────────────────────────────────────
-REMOVE 		= rm -fr
+REMOVE 		= rm -rf
 RM_FILES 	= "*.html" "*.css" "*.log" ".out" "*.o" "*.bin" ".elf"
 
 
@@ -23,53 +22,20 @@ install_base:
 	sudo apt update
 	sudo apt install nasm
 	sudo apt install qemu-system qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
-
-install_dependencies:
-	sudo apt update
 	sudo apt install -y build-essential bison flex libgmp3-dev libmpc-dev libmpfr-dev texinfo
 
-config_repo:
-	mkdir -p ~/opt/cross
-	mkdir ~/src
-	export PREFIX="$HOME/opt/cross"
-	export TARGET=i386-elf
-	export PATH="$PREFIX/bin:$PATH"
-
-update_repo:
-	export PREFIX="$HOME/opt/cross"
-	export TARGET=i386-elf
-	export PATH="$PREFIX/bin:$PATH"
-
-install_gcc:
-	cd ~/src
-	wget https://ftp.gnu.org/gnu/gcc/gcc-13.2.0/gcc-13.2.0.tar.xz
-	tar -xf gcc-13.2.0.tar.xz
-	cd gcc-13.2.0
-
-	./contrib/download_prerequisites
-	mkdir build && cd build
-	../configure --target=$TARGET --prefix=$PREFIX \
-				--disable-nls --enable-languages=c \
-				--without-headers
-	make all-gcc -j$(nproc)
-	make all-target-libgcc -j$(nproc)
-	make install-gcc
-	make install-target-libgcc
-
-install_binutils:
-	cd ~/src
-	wget https://ftp.gnu.org/gnu/binutils/binutils-2.42.tar.xz
-	tar -xf binutils-2.42.tar.xz
-	cd binutils-2.42
-
-	mkdir build && cd build
-	../configure --target=$TARGET --prefix=$PREFIX --with-sysroot --disable-nls --disable-werror
-	make -j$(nproc)
-	make install
-
-install_and_config_all: install_base install_dependencies config_repo install_binutils install_gcc
+install_and_config_all: install_base
+	bash shell/install.sh
 	which i386-elf-gcc
 	which i386-elf-ld
+
+update_repo:
+	bash shell/reload.sh
+
+clear_install:
+	sudo apt remove nasm
+	sudo rm -rf ~/src
+	sudo rm -rf ~/opt/cross
 
 # ─────────────────────────────────────────────────────────────
 # COMPILATION
