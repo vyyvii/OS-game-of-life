@@ -10,16 +10,33 @@ NAME		= os-image
 # ─────────────────────────────────────────────────────────────
 # TOOLS
 # ─────────────────────────────────────────────────────────────
-REMOVE 		= rm -f -r
+REMOVE 		= rm -fr
 RM_FILES 	= "*.html" "*.css" "*.log" ".out" "*.o" "*.bin" ".elf"
 
 
 # ─────────────────────────────────────────────────────────────
 # CONFIGURATION
 # ─────────────────────────────────────────────────────────────
+install_base:
+	sudo apt update
+	sudo apt install nasm
+	sudo apt install qemu-system qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
+
 install_dependencies:
 	sudo apt update
 	sudo apt install -y build-essential bison flex libgmp3-dev libmpc-dev libmpfr-dev texinfo
+
+config_repo:
+	mkdir -p ~/opt/cross
+	mkdir ~/src
+	export PREFIX="$HOME/opt/cross"
+	export TARGET=i386-elf
+	export PATH="$PREFIX/bin:$PATH"
+
+update_repo:
+	export PREFIX="$HOME/opt/cross"
+	export TARGET=i386-elf
+	export PATH="$PREFIX/bin:$PATH"
 
 install_gcc:
 	cd ~/src
@@ -48,19 +65,7 @@ install_binutils:
 	make -j$(nproc)
 	make install
 
-config_repo:
-	mkdir -p ~/opt/cross
-	mkdir ~/src
-	export PREFIX="$HOME/opt/cross"
-	export TARGET=i386-elf
-	export PATH="$PREFIX/bin:$PATH"
-
-update_repo:
-	export PREFIX="$HOME/opt/cross"
-	export TARGET=i386-elf
-	export PATH="$PREFIX/bin:$PATH"
-
-install_and_config_all: install_dependencies config_repo install_binutils install_gcc
+install_and_config_all: install_base install_dependencies config_repo install_binutils install_gcc
 	which i386-elf-gcc
 	which i386-elf-ld
 
