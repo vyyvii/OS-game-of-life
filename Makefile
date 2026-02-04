@@ -73,8 +73,9 @@ compile_boot:
 	nasm boot.asm -o boot.bin
 
 compile_kernel:
+	nasm -f elf32 kernel/kernel_entry.asm -o kernel/kernel_entry.o
 	i386-elf-gcc -ffreestanding -m32 -fno-stack-protector -nostdlib -c kernel/kernel.c -o kernel/kernel.o
-	i386-elf-ld -m elf_i386 -T kernel/linker.ld kernel/kernel.o -o kernel/kernel.elf
+	i386-elf-ld -m elf_i386 -T kernel/linker.ld kernel/kernel_entry.o kernel/kernel.o -o kernel/kernel.elf
 	i386-elf-objcopy -O binary kernel/kernel.elf kernel/kernel.bin
 
 $(NAME): compile_boot compile_kernel
