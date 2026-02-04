@@ -1,6 +1,6 @@
 ; PRINT PROTECTED MODE FILE
 
-[bits 32]
+[bits 32]                   ; PROTECTED MODE
 print_pm:                   ; Function that print a NULL-terminated string
     pushad                  ; Copy all the registers onto the stack
     mov ax, DATA_SEG
@@ -28,3 +28,5 @@ print_character_pm:
 done_pm:
     popad                   ; Put the register as it was previously
     ret                     ; Exit the function
+
+; LE CACHEUX, RIVIERE, DEFAUCHY | 2026

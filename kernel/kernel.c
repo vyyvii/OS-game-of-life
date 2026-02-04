@@ -1,20 +1,13 @@
-// ===============================
-// KERNEL PRINCIPAL EN C
-// ===============================
+// KERNEL FILE
+
+#include "print_string.c"
 
 void kmain(void)
 {
-    char *vga = (char*)0xb8000;
-
-    vga[0] = 'O';
-    vga[1] = 0x0f;
-
-    vga[2] = 'S';
-    vga[3] = 0x0f;
-
-    vga[4] = '!';
-    vga[5] = 0x0f;
-
-    while (1);
+    for (int i = 0; i < 80 * 25 * 2; i++)
+        video_memory[i] = 0;
+    print_string("Kernel C loaded successfully!");
+    while(1);
 }
 
+// LE CACHEUX, RIVIERE, DEFAUCHY | 2026
