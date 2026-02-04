@@ -1,6 +1,8 @@
 # MAKEFILE FOR OS-GAME OF LIFE
 
-.phony: compile_boot compile_kernel run_qemu config_repo clean fclean all re
+.phony: install_base install_dependencies install_binutils install_gcc \
+	install_and_config_all compile_boot compile_kernel run_qemu \
+	update_repo config_repo clean fclean all re
 
 # ─────────────────────────────────────────────────────────────
 # NAME
