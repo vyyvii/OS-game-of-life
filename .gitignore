@@ -2,5 +2,11 @@
 *.bin
 *.o
 
+binutils-2.42
+build-binutils
+gcc-13.2.0
+*.xz
+*.elf
+
 # vscode config
 .vscode
