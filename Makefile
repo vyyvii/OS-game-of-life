@@ -55,6 +55,11 @@ config_repo:
 	export TARGET=i386-elf
 	export PATH="$PREFIX/bin:$PATH"
 
+update_repo:
+	export PREFIX="$HOME/opt/cross"
+	export TARGET=i386-elf
+	export PATH="$PREFIX/bin:$PATH"
+
 install_and_config_all: install_dependencies config_repo install_binutils install_gcc
 	which i386-elf-gcc
 	which i386-elf-ld
@@ -62,7 +67,7 @@ install_and_config_all: install_dependencies config_repo install_binutils instal
 # ─────────────────────────────────────────────────────────────
 # COMPILATION
 # ─────────────────────────────────────────────────────────────
-all: $(NAME)
+all: update_repo $(NAME)
 
 compile_boot:
 	nasm boot.asm -o boot.bin
@@ -78,7 +83,7 @@ $(NAME): compile_boot compile_kernel
 # ─────────────────────────────────────────────────────────────
 # RUNNING
 # ─────────────────────────────────────────────────────────────
-run_qemu: $(NAME)
+run_qemu: all
 	qemu-system-i386 -fda $(NAME)
 
 # ─────────────────────────────────────────────────────────────
