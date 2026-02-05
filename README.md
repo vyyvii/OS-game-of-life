@@ -1,30 +1,152 @@
 # OS – Game of Life
-Do you want to play the Game of Life? We created an OS where you can only play the Game of Life.
+Do you want to play the Game of Life? We've created an OS where you can only play the Game of Life.
 
-# How to use it with NASM & QEMU ?
+## How to install everything in order to have the tools useful to create the os-image?
 
-First make sure nasm is installed, for ubuntu you can use :
-```bash
-sudo apt install nasm
-```
-
-You will then need to install qemu and a few other dependencies :
-```bash
-sudo apt install qemu-system qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
-```
-
-## How do you compiling and Running own OS
-
-If you want install gcc for a better Compilling you can with this line :
-
+First you have to install nasm & qemu & gcc/ld/objcopy for i386 32-bit.
+We've created a rule in the makefile to install everything and to configure correctly the packages.
 >[!WARNING]
-> You must acces root for this installation
+> You must access root for this installation
 
-```
+```bash
 Make install_and_config_all
 ```
 
-And after you can Compiling and running like this
+>[!WARNING]
+> This installation might be very long, just wait!
+
+## Troubleshooting for installation
+
+If the installations fails, try the following:
+- Verify your internet connection
+- Do: make clear_install && make install_base && make install_and_config_all
+- Run this in your terminal:
+```bash
+make clear_install
+export PREFIX="$HOME/opt/cross"
+export TARGET=i386-elf
+export PATH="$PREFIX/bin:$PATH"
+make install_and_config_all
 ```
+- Ask ChatGPT or pray
+
+## How do you compile & run your own OS
+
+>[!WARNING]
+> The following steps need all tools to be installed !
+
+Compile everything & run qemu:
+```bash
 make run_qemu
 ```
+
+Compile everything:
+```bash
+make all
+```
+
+Clear & compile everything:
+```bash
+make re
+```
+
+## Breakdown of the Makefile rules
+
+The Makefile for this project contains the following rules:
+- install_base:
+
+        Update Linux
+        Install "nasm"
+        Install "qemu"
+        Install some dependencies
+
+- install_and_config_all: install_base
+
+        Call install_base rule (see install_base)
+
+        Execute the shell file install.sh (./shell/install.sh)
+            ^ This file install & configure gcc & ld
+                for an i386 32-bit architecture
+
+        Verify if i386-elf-gcc & i386-elf-ld are installed
+
+- clear_install:
+
+        Remove all of the installations made previously
+        The folders "~/src" & "~/opt/cross" are deleted
+
+- all: $(NAME)
+
+        Call the principal rule to create the os-image file
+        (see $(NAME))
+
+- compile_boot:
+
+        Compile the bootloader file (boot.asm) in a binary (boot.bin)
+
+- compile_kernel:
+
+        Compile the kernel entry (kernel_entry.asm) in an object file (kernel_entry.o)
+
+        Compile the kernel with the following steps (all in ./kernel/ and in i386 format):
+        Compile the kernel (kernel.c) in an object file (kernel.o)
+        Link the linker (linker.ld), the kernel_entry (kernel_entry.o) & the kernel file (kernel.o) to an elf file (kernel.elf)
+        Transform the elf file (kernel.elf) to a binary file (kernel.bin)
+
+        This ensures that the kernel is linked whith the kernel entry
+
+
+- $(NAME): compile_boot compile_kernel
+
+        Main rule of the file. It compiles everything to os-image
+        Call compile_boot & compile_kernel rules (see compile_boot & compile_kernel)
+        The boot_sector binary & the kernel binary are put together in a new binary.
+
+        The kernel is at 0x1000 and the boot sector 0x0 & is 512 bytes long (terminated by 0x55AA).
+
+- run_qemu: all
+
+        Call all rule (see all)
+        Run qemu with our new os-image
+
+- clean:
+
+        Remove all files ending with:
+        .html, .css, .log, .out, .o, .bin or .elf
+
+- fclean: clean
+
+        Call clean rule (see clean)
+        Remove os-image
+
+- re: fclean all
+
+        Call fclean & all rules (see fclean & all)
+
+# Resources
+
+_"Writing a Simple Operating System — from Scratch"_ by Nick Blundell\
+School of Computer Science, University of Birmingham, UK\
+December 2, 2010\
+Copyright c 2009–2010 Nick Blundell
+
+_"vas-y, viens, on recode Windows de zéro"_ by V2F\
+youtube.com\
+October 10, 2024
+
+_"Building an OS - 1 - Hello world"_ by nanobyte\
+youtube.com\
+January 27, 2019
+
+_"Le Jeu de la Vie."_ by EGO\
+youtube.com\
+April 20, 2024
+
+# Contributors
+
+Adrien Le Cacheux\
+Nicolas Rivière\
+Victor Defauchy
+
+_LifeOS_\
+For  _OS-Game-Of-Life_  Project | 2026

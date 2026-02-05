@@ -14,6 +14,7 @@ NAME		= os-image
 REMOVE 		= rm -rf
 RM_FILES 	= "*.html" "*.css" "*.log" ".out" "*.o" "*.bin" "*.elf"
 
+export PATH := $(HOME)/opt/cross/bin:$(PATH)
 
 # ─────────────────────────────────────────────────────────────
 # CONFIGURATION
@@ -29,9 +30,6 @@ install_and_config_all: install_base
 	which i386-elf-gcc
 	which i386-elf-ld
 
-update_repo:
-	bash shell/reload.sh
-
 clear_install:
 	sudo apt remove nasm
 	sudo rm -rf ~/src
@@ -40,7 +38,7 @@ clear_install:
 # ─────────────────────────────────────────────────────────────
 # COMPILATION
 # ─────────────────────────────────────────────────────────────
-all: update_repo $(NAME)
+all: $(NAME)
 
 compile_boot:
 	nasm boot.asm -o boot.bin
