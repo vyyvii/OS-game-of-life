@@ -1,26 +1,28 @@
 # OS – Game of Life
 Do you want to play the Game of Life? We've created an OS where you can only play the Game of Life.
 
+We present you: **LifeOS**
+
 ## How to install everything in order to have the tools useful to create the os-image?
 
-First you have to install nasm & qemu & gcc/ld/objcopy for i386 32-bit.
+First you have to install nasm & qemu & gcc/ld/objcopy for i386 32-bit.\
 We've created a rule in the makefile to install everything and to configure correctly the packages.
 >[!WARNING]
-> You must access root for this installation
+> You must access **root** for this installation
 
 ```bash
-Make install_and_config_all
+make install_and_config_all
 ```
 
->[!WARNING]
+>[!NOTE]
 > This installation might be very long, just wait!
 
 ## Troubleshooting for installation
 
 If the installations fails, try the following:
-- Verify your internet connection
-- Do: make clear_install && make install_base && make install_and_config_all
-- Run this in your terminal:
+1. Verify your internet connection
+2. Do: make clear_install && make install_base && make install_and_config_all
+3. Run this in your terminal:
 ```bash
 make clear_install
 export PREFIX="$HOME/opt/cross"
@@ -28,12 +30,12 @@ export TARGET=i386-elf
 export PATH="$PREFIX/bin:$PATH"
 make install_and_config_all
 ```
-- Ask ChatGPT or pray
+4. Ask ChatGPT or pray
 
 ## How do you compile & run your own OS
 
 >[!WARNING]
-> The following steps need all tools to be installed !
+> The following steps need **all** tools to be installed !
 
 Compile everything & run qemu:
 ```bash
@@ -49,6 +51,11 @@ Clear & compile everything:
 ```bash
 make re
 ```
+
+> [!WARNING]
+> **DON'T RUN IT ON YOUR LAPTOP** WITHOUT AN HYPERVISOR!\
+> You can **kill your disk or your CPU**!\
+> ***Be careful!***
 
 ## Breakdown of the Makefile rules
 
@@ -123,6 +130,14 @@ The Makefile for this project contains the following rules:
 
         Call fclean & all rules (see fclean & all)
 
+# Langages
+
+- `asm`
+- `c`
+- `makefile`
+- `shell`
+- `linker script`
+
 # Resources
 
 _"Writing a Simple Operating System — from Scratch"_ by Nick Blundell\
@@ -144,9 +159,9 @@ April 20, 2024
 
 # Contributors
 
-Adrien Le Cacheux\
-Nicolas Rivière\
-Victor Defauchy
+Adrien **Le Cacheux**\
+Nicolas **Rivière**\
+Victor **Defauchy**
 
 _LifeOS_\
 For  _OS-Game-Of-Life_  Project | 2026
