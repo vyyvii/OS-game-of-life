@@ -1,6 +1,6 @@
 ; PRINT REAL MODE FILE
 
-[bits 16]
+[bits 16]                   ; REAL MODE
 print_rm:                   ; Function that print a NULL-terminated string
     pusha                   ; Copy all the registers onto the stack
     jmp print_character_rm  ; Enter the loop
@@ -17,3 +17,5 @@ print_character_rm:
 done_rm:
     popa                    ; Put the register as it was previously
     ret                     ; Exit the function
+
+; LE CACHEUX, RIVIERE, DEFAUCHY | 2026

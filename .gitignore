@@ -4,6 +4,12 @@
 *.xz
 *.elf
 
+binutils-2.42
+build-binutils
+gcc-13.2.0
+*.xz
+*.elf
+
 # vscode config
 .vscode
 gcc-13.2.0
