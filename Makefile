@@ -9,6 +9,28 @@
 NAME		= os-image
 
 # ─────────────────────────────────────────────────────────────
+# FILES
+# ─────────────────────────────────────────────────────────────
+KERNEL_SRC = \
+	kernel/kernel.c \
+	kernel/print_string.c \
+	kernel/irq/idt.c \
+	kernel/irq/pic.c \
+	kernel/irq/keyboard.c
+KERNEL_OBJ = $(KERNEL_SRC:.c=.o)
+
+KERNEL_ASM = \
+	kernel/kernel_entry.asm \
+	kernel/irq/idt_asm.asm
+KERNEL_ASM_OBJ = $(KERNEL_ASM:.asm=.o)
+
+# ─────────────────────────────────────────────────────────────
+# COMPILATION FLAGS & LIBS
+# ─────────────────────────────────────────────────────────────
+CFLAGS      = -Iinclude
+LDFLAGS     =
+
+# ─────────────────────────────────────────────────────────────
 # TOOLS
 # ─────────────────────────────────────────────────────────────
 REMOVE 		= rm -rf
@@ -40,13 +62,17 @@ clear_install:
 # ─────────────────────────────────────────────────────────────
 all: $(NAME)
 
+%.o: %.asm
+	nasm -f elf32 $< -o $@
+
+%.o: %.c
+	i386-elf-gcc -ffreestanding -m32 -fno-stack-protector -nostdlib $(CFLAGS) -c $< -o $@
+
 compile_boot:
 	nasm boot.asm -o boot.bin
 
-compile_kernel:
-	nasm -f elf32 kernel/kernel_entry.asm -o kernel/kernel_entry.o
-	i386-elf-gcc -ffreestanding -m32 -fno-stack-protector -nostdlib -c kernel/kernel.c -o kernel/kernel.o
-	i386-elf-ld -m elf_i386 -T kernel/linker.ld kernel/kernel_entry.o kernel/kernel.o -o kernel/kernel.elf
+compile_kernel: $(KERNEL_OBJ) $(KERNEL_ASM_OBJ)
+	i386-elf-ld -m elf_i386 -T kernel/linker.ld $(KERNEL_ASM_OBJ) $(KERNEL_OBJ) -o kernel/kernel.elf
 	i386-elf-objcopy -O binary kernel/kernel.elf kernel/kernel.bin
 
 $(NAME): compile_boot compile_kernel

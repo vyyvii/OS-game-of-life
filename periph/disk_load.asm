@@ -1,7 +1,7 @@
+; OS-Game-Of-Life
 ; DISK LOAD FILE
 
-[bits 16]                                   ; REAL MODE
-
+[bits 16]                       ; REAL MODE
 load_kernel:
     pusha
 

@@ -1,7 +1,7 @@
+// OS-Game-Of-Life
 // PRINT STRING C FILE
 
-// Pointeur vers la mémoire vidéo
-char *video_memory = (char*) 0xb8000;
+#include "kernel.h"
 
 // Write a char
 void print_char(char c, int col, int row, char attr)
@@ -15,10 +15,11 @@ void print_char(char c, int col, int row, char attr)
 }
 
 // Write a string
-void print_string(char *str)
+void print_string(char *str, int line)
 {
     int i = 0;
-    int col = 0, row = 0;
+    int col = 0;
+    int row = line;
 
     while (str[i] != '\0') {
         print_char(str[i], col++, row, 0x0f);

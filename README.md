@@ -62,73 +62,77 @@ make re
 The Makefile for this project contains the following rules:
 - install_base:
 
-        Update Linux
-        Install "nasm"
-        Install "qemu"
-        Install some dependencies
+Update Linux\
+Install "nasm"\
+Install "qemu"\
+Install some dependencies
 
 - install_and_config_all: install_base
 
-        Call install_base rule (see install_base)
+Call install_base rule (see install_base).
 
-        Execute the shell file install.sh (./shell/install.sh)
-            ^ This file install & configure gcc & ld
-                for an i386 32-bit architecture
+Execute the shell file install.sh (./shell/install.sh).\
+    ^ This file install & configure gcc & ld\
+        for an i386 32-bit architecture.
 
-        Verify if i386-elf-gcc & i386-elf-ld are installed
+Verify if i386-elf-gcc & i386-elf-ld are installed.
 
 - clear_install:
 
-        Remove all of the installations made previously
-        The folders "~/src" & "~/opt/cross" are deleted
+Remove all of the installations made previously.\
+The folders "~/src" & "~/opt/cross" are deleted.
 
 - all: $(NAME)
 
-        Call the principal rule to create the os-image file
-        (see $(NAME))
+Call the principal rule to create the os-image file (see $(NAME)).
+
+- %.o: %.asm
+
+Compile all of the assemblers files with nasm in elf32 format.
+
+- %.o: %.c
+
+Compile all of the c files with i386-elf-gcc.
 
 - compile_boot:
 
-        Compile the bootloader file (boot.asm) in a binary (boot.bin)
+Compile the bootloader file (boot.asm) in a binary (boot.bin).
 
 - compile_kernel:
 
-        Compile the kernel entry (kernel_entry.asm) in an object file (kernel_entry.o)
+Compile the kernel.\
+For that, it compiles all the c (.c) files & assemblers (.asm) files into objects (.o) files with the $(KERNEL_OBJ) $(KERNEL_ASM_OBJ) rules.\
+Then it links everythings with the linker.ld file.\
+Finally, it transform the elf file (kernel.elf) to a binary file (kernel.bin).
 
-        Compile the kernel with the following steps (all in ./kernel/ and in i386 format):
-        Compile the kernel (kernel.c) in an object file (kernel.o)
-        Link the linker (linker.ld), the kernel_entry (kernel_entry.o) & the kernel file (kernel.o) to an elf file (kernel.elf)
-        Transform the elf file (kernel.elf) to a binary file (kernel.bin)
-
-        This ensures that the kernel is linked whith the kernel entry
-
+This ensures that the kernel is linked whith the kernel entry.
 
 - $(NAME): compile_boot compile_kernel
 
-        Main rule of the file. It compiles everything to os-image
-        Call compile_boot & compile_kernel rules (see compile_boot & compile_kernel)
-        The boot_sector binary & the kernel binary are put together in a new binary.
+Main rule of the file. It compiles everything to os-image.\
+Call compile_boot & compile_kernel rules (see compile_boot & compile_kernel).\
+The boot_sector binary & the kernel binary are put together in a new binary.
 
-        The kernel is at 0x1000 and the boot sector 0x0 & is 512 bytes long (terminated by 0x55AA).
+The kernel is at 0x1000 and the boot sector 0x0 & is 512 bytes long (terminated by 0x55AA).
 
 - run_qemu: all
 
-        Call all rule (see all)
-        Run qemu with our new os-image
+Call all rule (see all).\
+Run qemu with our new os-image.
 
 - clean:
 
-        Remove all files ending with:
-        .html, .css, .log, .out, .o, .bin or .elf
+Remove all files ending with:\
+.html, .css, .log, .out, .o, .bin or .elf
 
 - fclean: clean
 
-        Call clean rule (see clean)
-        Remove os-image
+Call clean rule (see clean).\
+Remove os-image.
 
 - re: fclean all
 
-        Call fclean & all rules (see fclean & all)
+Call fclean & all rules (see fclean & all).
 
 # Langages
 

@@ -1,6 +1,7 @@
+; OS-Game-Of-Life
 ; GDT FILE
 
-[bits 16]                           ; REAL MODE
+[bits 16]                           ; PROTECTED MODE
 gdt_start:                          ; START SEGMENT
 
 gdt_null:                           ; NULL SEGMENT
@@ -22,7 +23,6 @@ gdt_data:                           ; DATA SEGMENT
     db 10010010b
     db 11001111b
     db 0x0
-
 gdt_end:                            ; ENG SEGMENT
 
 gdt_descriptor:                     ; Declare the GDT

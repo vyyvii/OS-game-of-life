@@ -1,3 +1,4 @@
+; OS-Game-Of-Life
 ; BOOT FILE
 
 ; ===============================
@@ -20,8 +21,6 @@ start:
 
     mov bp, 0x9000              ; Stack
     mov sp, bp
-
-    sti
 
     mov bx, MSG_REAL_MODE
     call print_rm
@@ -60,7 +59,6 @@ BEGIN_PM:
 BOOT_DRIVE db 0
 MSG_REAL_MODE db "Started in 16-bit Real Mode", 0x0d, 0x0a, 0
 MSG_PROT_MODE db "32-bit Protected Mode", 0
-MSG_HELLO_WORLD db "Hello World!", 0
 
 ; ===============================
 ; PADDING & SIGNATURE
