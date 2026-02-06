@@ -165,7 +165,7 @@ youtube.com\
 April 20, 2024
 
 _ghaiklor-os-gcc_ by Eugene Obrezkov\
-https://github.com/ghaiklor/ghaiklor-os-gcc\
+https://github.com/ghaiklor/ghaiklor-os-gcc \
 Copyright (c) 2016 Eugene Obrezkov
 
 _nanobyte_os_ by nanobyte\
@@ -175,8 +175,10 @@ _Wiki OSdev_ by MediaWiki\
 mediawiki.org\
 https://wiki.osdev.org/Expanded_Main_Page
 
+
 >[!NOTE]
 > This are resources, not models
+
 
 # Contributors
 
