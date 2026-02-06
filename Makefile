@@ -13,10 +13,11 @@ NAME		= os-image
 # ─────────────────────────────────────────────────────────────
 KERNEL_SRC = \
 	kernel/kernel.c \
-	kernel/print_string.c \
+	kernel/functions.c \
 	kernel/irq/idt.c \
 	kernel/irq/pic.c \
-	kernel/irq/keyboard.c
+	kernel/irq/keyboard.c \
+	kernel/game_of_life/game.c
 KERNEL_OBJ = $(KERNEL_SRC:.c=.o)
 
 KERNEL_ASM = \

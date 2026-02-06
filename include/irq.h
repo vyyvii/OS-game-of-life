@@ -1,12 +1,14 @@
 // OS-Game-Of-Life
 // IRQ HEADER
 
-#ifndef IDT_H
-    #define IDT_H
+#ifndef IRQ_H
+    #define IRQ_H
+    #define BACKSPACE 0x0E
+    #define ENTER 0x1C
+    #define SC_MAX 57
+    #include "types.h"
 
-#include "types.h"
-
-// IDT
+// IDT (interrupt descriptor table)
 struct idt_entry {
     uint16_t offset_low;
     uint16_t selector;
@@ -22,7 +24,7 @@ struct idt_ptr {
 
 void idt_init(void);
 
-// PIC
+// PIC (programmable interrupt transistor)
 void pic_remap(void);
 
 #endif
