@@ -3,38 +3,62 @@
 
 #include "kernel.h"
 
-static void init_board(int board[25][80])
+/**
+ * @brief Function that initialise the board with all the cells in the state 0
+ * @param board The board with a size of 24 by 80
+ * @note VGA text mode is 25 by 80 cells large, but here, the first line is infos.
+ */
+void init_board(int board[24][80])
 {
-    for (int row = 0; row < 25; row++) {
+    for (int row = 1; row < 25; row++) {
         for (int col = 0; col < 80; col++)
             board[row][col] = 0;
     }
 }
 
-void invert_cell(int board[25][80], int row, int col)
+/**
+ * @brief Function that invert the state of a cell in the board
+ * @param board The board with a size of 24 by 80
+ * @param row The row
+ * @param col The col
+ * @note VGA text mode is 25 by 80 cells large, but here, the first line is infos.
+ */
+void invert_cell(int board[24][80], int row, int col)
 {
     board[row][col] = (board[row][col] == 0) ? 1 : 0;
 }
 
-void print_cell(int board[25][80], int row, int col)
+/**
+ * @brief Function that print a cell of the board
+ * @param board The board with a size of 24 by 80
+ * @param row The row
+ * @param col The col
+ * @note VGA text mode is 25 by 80 cells large, but here, the first line is infos.
+ */
+void print_cell(int board[24][80], int row, int col)
 {
     if (board[row][col] == 1)
         print_char(' ', row, col, BLACK_ON_WHITE);
 }
 
-void print_board(int board[25][80])
+/**
+ * @brief Function that print the board
+ * @param board The board with a size of 24 by 80
+ * @note VGA text mode is 25 by 80 cells large, but here, the first line is infos.
+ */
+void print_board(int board[24][80])
 {
-    for (int row = 0; row < 25; row++) {
+    for (int row = 0; row < 24; row++) {
         for (int col = 0; col < 80; col++)
             print_cell(board, row, col);
     }
 }
 
+/**
+ * @brief Function that launch the GAME OF LIFE
+ */
 void game(void)
 {
-    int board[25][80];
-
-    init_board(board);
     board[9][40] = 1;
     board[9][41] = 1;
     board[9][42] = 1;

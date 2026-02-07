@@ -13,11 +13,13 @@ NAME		= os-image
 # ─────────────────────────────────────────────────────────────
 KERNEL_SRC = \
 	kernel/kernel.c \
+	kernel/ports.c \
 	kernel/functions.c \
 	kernel/irq/idt.c \
 	kernel/irq/pic.c \
-	kernel/irq/keyboard.c \
-	kernel/game_of_life/game.c
+	kernel/game_of_life/game.c \
+	periph/keyboard.c \
+	periph/screen.c
 KERNEL_OBJ = $(KERNEL_SRC:.c=.o)
 
 KERNEL_ASM = \
@@ -35,7 +37,7 @@ LDFLAGS     =
 # TOOLS
 # ─────────────────────────────────────────────────────────────
 REMOVE 		= rm -rf
-RM_FILES 	= "*.html" "*.css" "*.log" ".out" "*.o" "*.bin" "*.elf"
+RM_FILES 	= "*.html" "*.css" ".out" "*.o" "*.bin" "*.elf"
 
 export PATH := $(HOME)/opt/cross/bin:$(PATH)
 
@@ -84,6 +86,7 @@ $(NAME): compile_boot compile_kernel
 # ─────────────────────────────────────────────────────────────
 run_qemu: all
 	qemu-system-i386 -fda $(NAME)
+
 
 # ─────────────────────────────────────────────────────────────
 # CLEANING

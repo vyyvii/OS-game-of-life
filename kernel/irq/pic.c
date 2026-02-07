@@ -1,13 +1,12 @@
 // OS-Game-Of-Life
 // PIC FILE
 
-#include "irq.h"
+#include "kernel.h"
 
-static inline void outb(uint16_t port, uint8_t val)
-{
-    __asm__ volatile ("outb %0, %1" : : "a"(val), "dN"(port));
-}
-
+/**
+ * @brief Remap the PIC because default value of the PIC are mapped with CPU registers value.
+ * @note The new adress are by convention 0x20 & 0x21
+ */
 void pic_remap(void)
 {
     outb(0x20, 0x11);
