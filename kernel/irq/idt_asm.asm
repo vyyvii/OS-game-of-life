@@ -4,16 +4,8 @@
 [bits 32]                   ; PROTECTED MODE
 global irq0_handler         ; Indicates irq0_handler as a global function
 global irq1_handler         ; Indicates irq1_handler as a global function
-global isr_default
 
 extern keyboard_handler     ; Make the keyboard_handler function callable in this asm file
-
-isr_default:
-    cli
-.hang:
-    hlt
-    jmp .hang
-
 
 irq0_handler:               ; Handle the timer interruption
     pusha                   ; Save registers

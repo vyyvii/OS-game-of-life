@@ -23,8 +23,9 @@ const char sc_ascii[] = {
 static void handle_up(cursor_t *cursor)
 {
     if (cursor->row < 2)
-        cursor->row = 25;
-    cursor->row--;
+        cursor->row = MAX_ROW - 1;
+    else
+        cursor->row--;
 }
 
 /**
@@ -33,9 +34,10 @@ static void handle_up(cursor_t *cursor)
  */
 static void handle_down(cursor_t *cursor)
 {
-    if (cursor->row > 23)
-        cursor->row = 0;
-    cursor->row++;
+    if (cursor->row > MAX_ROW - 2)
+        cursor->row = 1;
+    else
+        cursor->row++;
 }
 
 /**
@@ -45,8 +47,9 @@ static void handle_down(cursor_t *cursor)
 static void handle_left(cursor_t *cursor)
 {
     if (cursor->col < 1)
-        cursor->col = 80;
-    cursor->col--;
+        cursor->col = MAX_COL - 1;
+    else
+        cursor->col--;
 }
 
 /**
@@ -55,9 +58,10 @@ static void handle_left(cursor_t *cursor)
  */
 static void handle_right(cursor_t *cursor)
 {
-    if (cursor->col > 78)
-        cursor->col = -1;
-    cursor->col++;
+    if (cursor->col > MAX_COL - 2)
+        cursor->col = 0;
+    else
+        cursor->col++;
 }
 
 /**
@@ -66,14 +70,12 @@ static void handle_right(cursor_t *cursor)
  */
 void keyboard_handler(void)
 {
-    uint8_t scancode = inb(0x60);
+    uint8_t scancode = inb(SCANCODE_REG);
     char letter = sc_ascii[(int)scancode];
 
-    if (scancode > SC_MAX)
-        return;
     if (letter == 'Q')
         outw(0x604, 0x2000);
-    if (scancode == 0xe0) {
+    if (scancode == SCANCODE_EXT) {
         extended = 1;
         return;
     }

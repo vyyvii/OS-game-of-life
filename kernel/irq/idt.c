@@ -6,7 +6,6 @@
 struct idt_entry idt[256];              // The IDT
 static struct idt_ptr idt_descriptor;   // The descripror of the IDT
 
-extern void isr_default(void);
 extern void irq0_handler(void);         // Call the ASM function that handle IRQ0
 extern void irq1_handler(void);         // Call the ASM function that handle IRQ1
 
@@ -42,8 +41,6 @@ void idt_init(void)
     idt_descriptor.base  = (uint32_t)&idt;
     __asm__ __volatile__("lidtl (%0)" : : "r" (&idt_descriptor));
     pic_remap();        // REMAP the PIC (Programmable Interrupt Transistor)
-    for (int i = 0; i < 32; i++)
-        idt_set_gate(i, (uint32_t)isr_default);
     idt_set_gate(0x20, (uint32_t)irq0_handler);
     idt_set_gate(0x21, (uint32_t)irq1_handler);
 }

@@ -12,7 +12,7 @@
  */
 void print_char(char c, int row, int col, char attr)
 {
-    int offset = 2 * (row * 80 + col);
+    int offset = 2 * (row * MAX_COL + col);
 
     if (!attr)
         attr = WHITE_ON_BLACK;
@@ -32,7 +32,7 @@ void print_string(char *str, int row, int col, int color)
 {
     for (int i = 0; str[i]; i++) {
         print_char(str[i], row, col++, color);
-        if (col >= 80) {
+        if (col >= MAX_COL) {
             col = 0;
             row++;
         }
@@ -45,7 +45,7 @@ void print_string(char *str, int row, int col, int color)
  */
 void reset_screen(void)
 {
-    for (int i = 0; i < 80 * 25 * 2; i++)
+    for (int i = 0; i < MAX_COL * MAX_ROW * 2; i++)
         video_memory[i] = 0;
 }
 

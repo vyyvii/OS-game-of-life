@@ -10,6 +10,7 @@
     #define FULL_GRAY 0x88
 
     #define MAX_ROW 25
+    #define MAX_ROW_BOARD 24
     #define MAX_COL 80
 
     #define SCANCODE_REG 0x60

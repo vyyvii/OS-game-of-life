@@ -8,10 +8,10 @@
  * @param board The board with a size of 24 by 80
  * @note VGA text mode is 25 by 80 cells large, but here, the first line is infos.
  */
-void init_board(int board[24][80])
+void init_board(int board[MAX_ROW_BOARD][MAX_COL])
 {
-    for (int row = 1; row < 25; row++) {
-        for (int col = 0; col < 80; col++)
+    for (int row = 1; row < MAX_ROW_BOARD; row++) {
+        for (int col = 0; col < MAX_COL; col++)
             board[row][col] = 0;
     }
 }
@@ -23,7 +23,7 @@ void init_board(int board[24][80])
  * @param col The col
  * @note VGA text mode is 25 by 80 cells large, but here, the first line is infos.
  */
-void invert_cell(int board[24][80], int row, int col)
+void invert_cell(int board[MAX_ROW_BOARD][MAX_COL], int row, int col)
 {
     board[row][col] = (board[row][col] == 0) ? 1 : 0;
 }
@@ -35,7 +35,7 @@ void invert_cell(int board[24][80], int row, int col)
  * @param col The col
  * @note VGA text mode is 25 by 80 cells large, but here, the first line is infos.
  */
-void print_cell(int board[24][80], int row, int col)
+void print_cell(int board[MAX_ROW_BOARD][MAX_COL], int row, int col)
 {
     if (board[row][col] == 1)
         print_char(' ', row, col, BLACK_ON_WHITE);
@@ -46,10 +46,10 @@ void print_cell(int board[24][80], int row, int col)
  * @param board The board with a size of 24 by 80
  * @note VGA text mode is 25 by 80 cells large, but here, the first line is infos.
  */
-void print_board(int board[24][80])
+void print_board(int board[MAX_ROW_BOARD][MAX_COL])
 {
-    for (int row = 0; row < 24; row++) {
-        for (int col = 0; col < 80; col++)
+    for (int row = 1; row < MAX_ROW_BOARD; row++) {
+        for (int col = 0; col < MAX_COL; col++)
             print_cell(board, row, col);
     }
 }
