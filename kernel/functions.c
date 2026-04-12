@@ -40,4 +40,4 @@ void unappend(char str[])
     str[len - 1] = '\0';
 }
 
-// LE CACHEUX, RIVIERE, DEFAUCHY | 2026
+// DEFAUCHY, RIVIERE | 2026

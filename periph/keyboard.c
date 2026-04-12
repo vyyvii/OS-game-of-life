@@ -95,4 +95,4 @@ void keyboard_handler(void)
     }
 }
 
-// LE CACHEUX, RIVIERE, DEFAUCHY | 2026
+// DEFAUCHY, RIVIERE | 2026

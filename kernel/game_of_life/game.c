@@ -67,4 +67,4 @@ void game(void)
     print_board(board);
 }
 
-// LE CACHEUX, RIVIERE, DEFAUCHY | 2026
+// DEFAUCHY, RIVIERE | 2026

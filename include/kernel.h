@@ -86,4 +86,4 @@ void game(void);
 
 #endif
 
-// LE CACHEUX, RIVIERE, DEFAUCHY | 2026
+// DEFAUCHY, RIVIERE | 2026

@@ -10,4 +10,4 @@ _start:
   call kmain
   jmp $
 
-; LE CACHEUX, RIVIERE, DEFAUCHY | 2026
+; DEFAUCHY, RIVIERE | 2026

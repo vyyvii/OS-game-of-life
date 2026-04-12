@@ -26,4 +26,4 @@ init_pm:
 
     call BEGIN_PM           ; Start the protected mode
 
-; LE CACHEUX, RIVIERE, DEFAUCHY | 2026
+; DEFAUCHY, RIVIERE | 2026

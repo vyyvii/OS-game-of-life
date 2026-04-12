@@ -45,4 +45,4 @@ void idt_init(void)
     idt_set_gate(0x21, (uint32_t)irq1_handler);
 }
 
-// LE CACHEUX, RIVIERE, DEFAUCHY | 2026
+// DEFAUCHY, RIVIERE | 2026

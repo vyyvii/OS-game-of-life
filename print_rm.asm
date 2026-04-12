@@ -19,4 +19,4 @@ done_rm:
     popa                    ; Put the register as it was previously
     ret                     ; Exit the function
 
-; LE CACHEUX, RIVIERE, DEFAUCHY | 2026
+; DEFAUCHY, RIVIERE | 2026

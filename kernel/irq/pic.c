@@ -21,4 +21,4 @@ void pic_remap(void)
     outb(0xA1, 0x0);
 }
 
-// LE CACHEUX, RIVIERE, DEFAUCHY | 2026
+// DEFAUCHY, RIVIERE | 2026

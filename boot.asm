@@ -66,4 +66,4 @@ MSG_PROT_MODE db "32-bit Protected Mode", 0
 times 510-($-$$) db 0
 dw 0xaa55
 
-; LE CACHEUX, RIVIERE, DEFAUCHY | 2026
+; DEFAUCHY, RIVIERE | 2026

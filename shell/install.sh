@@ -3,6 +3,11 @@
 
 # Use by the Makefile to istall & configure gcc & ld with i386 32-bytes
 
+rm -rf ~/src
+rm -rf ~/opt/cross
+sudo apt update
+sudo apt install libc6-dev-i386 gcc-multilib g++-multilib
+
 	# Configure foldres
 mkdir -p ~/opt/cross
 mkdir ~/src

@@ -18,13 +18,13 @@ KERNEL_SRC = \
 	kernel/irq/idt.c \
 	kernel/irq/pic.c \
 	kernel/game_of_life/game.c \
-	periph/keyboard.c \
-	periph/screen.c
+	periph/keyboard.c
 KERNEL_OBJ = $(KERNEL_SRC:.c=.o)
 
 KERNEL_ASM = \
 	kernel/kernel_entry.asm \
-	kernel/irq/idt_asm.asm
+	kernel/irq/idt_asm.asm \
+	periph/screen.asm
 KERNEL_ASM_OBJ = $(KERNEL_ASM:.asm=.o)
 
 # ─────────────────────────────────────────────────────────────
@@ -44,7 +44,7 @@ export PATH := $(HOME)/opt/cross/bin:$(PATH)
 # ─────────────────────────────────────────────────────────────
 # CONFIGURATION
 # ─────────────────────────────────────────────────────────────
-install_base:
+install_base: clear_install
 	sudo apt update
 	sudo apt install nasm
 	sudo apt install qemu-system qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
