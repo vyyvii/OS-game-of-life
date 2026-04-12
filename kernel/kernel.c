@@ -8,6 +8,19 @@ int board[MAX_ROW_BOARD][MAX_COL];          // The board for the GAME ((25 - 1) 
 cursor_t cursor = { 1, 0, FULL_GRAY };    // The cursor that can move
 
 /**
+ * @brief Function that launch the GAME OF LIFE
+ */
+void game(void)
+{
+    board[9][40] = 1;
+    board[9][41] = 1;
+    board[9][42] = 1;
+    board[10][42] = 1;
+    board[11][41] = 1;
+    print_board(board);
+}
+
+/**
  * @brief The main function of the KERNEL
  * @note This function is called by the bootloader by kernel_entry.asm
  */

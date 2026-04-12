@@ -1,5 +1,5 @@
 ; OS-Game-Of-Life
-; BOARD FILE
+; BOARD PRINTING FILE
 
 [bits 32]                           ; PROTECTED MODE
 

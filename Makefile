@@ -14,14 +14,14 @@ NAME		= os-image
 KERNEL_SRC = \
 	kernel/kernel.c \
 	kernel/irq/idt.c \
-	kernel/game_of_life/game.c \
 	periph/keyboard.c
 KERNEL_OBJ = $(KERNEL_SRC:.c=.o)
 
 KERNEL_ASM = \
 	kernel/kernel_entry.asm \
 	kernel/ports.asm \
-	kernel/game_of_life/board.asm \
+	kernel/game_of_life/board_init.asm \
+	kernel/game_of_life/board_printing.asm \
 	kernel/irq/idt_asm.asm \
 	kernel/irq/pic.asm \
 	periph/screen.asm
@@ -99,4 +99,4 @@ fclean: clean
 
 re: fclean all
 
-#LE CACHEUX, RIVIERE, DEFAUCHY | 2026
+# DEFAUCHY | 2026
