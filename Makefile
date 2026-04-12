@@ -13,17 +13,17 @@ NAME		= os-image
 # ─────────────────────────────────────────────────────────────
 KERNEL_SRC = \
 	kernel/kernel.c \
-	kernel/ports.c \
-	kernel/functions.c \
 	kernel/irq/idt.c \
-	kernel/irq/pic.c \
 	kernel/game_of_life/game.c \
 	periph/keyboard.c
 KERNEL_OBJ = $(KERNEL_SRC:.c=.o)
 
 KERNEL_ASM = \
 	kernel/kernel_entry.asm \
+	kernel/ports.asm \
+	kernel/game_of_life/board.asm \
 	kernel/irq/idt_asm.asm \
+	kernel/irq/pic.asm \
 	periph/screen.asm
 KERNEL_ASM_OBJ = $(KERNEL_ASM:.asm=.o)
 

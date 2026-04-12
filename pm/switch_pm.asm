@@ -26,4 +26,4 @@ init_pm:
 
     call BEGIN_PM           ; Start the protected mode
 
-; DEFAUCHY, RIVIERE | 2026
+; DEFAUCHY | 2026

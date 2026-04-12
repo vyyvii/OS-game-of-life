@@ -1,14 +1,12 @@
 ; OS-Game-Of-Life
-; DISK LOAD FILE
-
-; DEFAUCHY, RIVIERE | 2026
+; SCREEN FILE
 
 [bits 32]                       ; PROTECTED MODE
 
 global print_char               ; Indicates print_char as a global function
 global print_string             ; Indicates print_string as a global function
 global reset_screen             ; Indicates reset_screen as a global function
-global put_cursor             ; Indicates put_cursor as a global function
+global put_cursor               ; Indicates put_cursor as a global function
 
 %include "include/constants.inc"; Include the contants (define)
 
@@ -48,6 +46,7 @@ write_char:
 print_string:                   ; Write a string on the screen
     push ebp
     mov ebp, esp
+
     mov esi, [ebp + 8]          ; str
     mov ebx, [ebp + 12]         ; row
     mov ecx, [ebp + 16]         ; col
@@ -56,7 +55,7 @@ print_string:                   ; Write a string on the screen
 .loop:
     mov al, [esi]
     cmp al, 0                   ; While we are not at the end of the string
-    je .end                     ; Continue printing
+    je .end                     ; Continue printing, else stop
 
     push esi                    ; Save registers
 
@@ -135,4 +134,4 @@ put_cursor:                     ; Print the cursor
     pop ebp
     ret
 
-; DEFAUCHY, RIVIERE | 2026
+; DEFAUCHY | 2026

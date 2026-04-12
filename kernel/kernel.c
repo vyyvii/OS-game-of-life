@@ -19,10 +19,10 @@ void kmain(void)
     init_board(board);                      // Initalise the board for the GAME OF LIFE
     put_cursor(&cursor);                    // Put the cursor in the middle of the screen
     print_string(" LifeOS | Kernel x86 Protected Mode", 0, 0, WHITE_ON_GRAY);
-    print_string("                           Defauchy, Riviere ", 0, 35, WHITE_ON_GRAY);
+    print_string("                                    Defauchy ", 0, 35, WHITE_ON_GRAY);
     __asm__ volatile ("sti");               // Enable CPU interruption
     game();                                 // Launch the GAME OF LIFE
     while(1);                               // HANG
 }
 
-// DEFAUCHY, RIVIERE | 2026
+// DEFAUCHY | 2026

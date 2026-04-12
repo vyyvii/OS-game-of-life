@@ -29,32 +29,6 @@ void invert_cell(int board[MAX_ROW_BOARD][MAX_COL], int row, int col)
 }
 
 /**
- * @brief Function that print a cell of the board
- * @param board The board with a size of 24 by 80
- * @param row The row
- * @param col The col
- * @note VGA text mode is 25 by 80 cells large, but here, the first line is infos.
- */
-void print_cell(int board[MAX_ROW_BOARD][MAX_COL], int row, int col)
-{
-    if (board[row][col] == 1)
-        print_char(' ', row, col, BLACK_ON_WHITE);
-}
-
-/**
- * @brief Function that print the board
- * @param board The board with a size of 24 by 80
- * @note VGA text mode is 25 by 80 cells large, but here, the first line is infos.
- */
-void print_board(int board[MAX_ROW_BOARD][MAX_COL])
-{
-    for (int row = 1; row < MAX_ROW_BOARD; row++) {
-        for (int col = 0; col < MAX_COL; col++)
-            print_cell(board, row, col);
-    }
-}
-
-/**
  * @brief Function that launch the GAME OF LIFE
  */
 void game(void)
@@ -67,4 +41,4 @@ void game(void)
     print_board(board);
 }
 
-// DEFAUCHY, RIVIERE | 2026
+// DEFAUCHY | 2026

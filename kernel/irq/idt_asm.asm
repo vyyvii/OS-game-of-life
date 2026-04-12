@@ -29,4 +29,4 @@ irq1_handler:               ; Handle the keyboard interruption
     popa                    ; Restore registers
     iret                    ; Return
 
-; DEFAUCHY, RIVIERE | 2026
+; DEFAUCHY | 2026

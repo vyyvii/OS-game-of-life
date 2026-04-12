@@ -74,7 +74,7 @@ void keyboard_handler(void)
     char letter = sc_ascii[(int)scancode];
 
     if (letter == 'Q')
-        outw(0x604, 0x2000);
+        outw(QUIT_QEMU, 0x2000);
     if (scancode == SCANCODE_EXT) {
         extended = 1;
         return;
@@ -95,4 +95,4 @@ void keyboard_handler(void)
     }
 }
 
-// DEFAUCHY, RIVIERE | 2026
+// DEFAUCHY | 2026

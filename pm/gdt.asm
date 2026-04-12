@@ -32,4 +32,4 @@ gdt_descriptor:                     ; Declare the GDT
 CODE_SEG equ gdt_code - gdt_start   ; Declare selector for CODE segment
 DATA_SEG equ gdt_data - gdt_start   ; Declare selector for DATA segment
 
-; DEFAUCHY, RIVIERE | 2026
+; DEFAUCHY | 2026

@@ -21,9 +21,10 @@
     #define LEFT_ARROW 0x4b
     #define RIGHT_ARROW 0x4d
 
+    #define QUIT_QEMU 0x604
     #define BACKSPACE 0x0E
     #define ENTER 0x1C
-    #define SC_MAX 57
+    #define SC_MAX 5
 
     #include "types.h"
 
@@ -86,4 +87,4 @@ void game(void);
 
 #endif
 
-// DEFAUCHY, RIVIERE | 2026
+// DEFAUCHY | 2026

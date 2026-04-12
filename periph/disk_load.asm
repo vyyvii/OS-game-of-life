@@ -30,4 +30,4 @@ disk_error:
 
 MSG_ERROR db "DISK ERROR!", 0
 
-; DEFAUCHY, RIVIERE | 2026
+; DEFAUCHY | 2026
