@@ -6,7 +6,7 @@
 
     #define WHITE_ON_BLACK 0x0f
     #define BLACK_ON_WHITE 0xf0
-    #define WHITE_ON_GRAY 0x7f
+    #define WHITE_ON_GRAY 0x8f
     #define FULL_GRAY 0x88
 
     #define MAX_ROW 25
@@ -25,6 +25,10 @@
     #define BACKSPACE 0x0E
     #define ENTER 0x1C
     #define SC_MAX 5
+
+    #define DEFAULT_SPEED 10
+    #define MIN_SPEED 20
+    #define MAX_SPEED 1
 
     #include "types.h"
 
@@ -50,8 +54,10 @@ struct idt_ptr {
 
 // EXTERN
 extern char *video_memory;
-extern int board[24][80];
+extern int board[MAX_ROW_BOARD][MAX_COL];
 extern cursor_t cursor;
+extern volatile int go;
+extern volatile long speed;
 
 // IDT (interrupt descriptor table)
 void idt_init(void);
@@ -80,10 +86,13 @@ void put_cursor(cursor_t *cursor);
 void keyboard_handler(void);
 
 // GAME
-void init_board(int board[24][80]);
-void print_cell(int board[24][80], int row, int col);
-void print_board(int board[24][80]);
-void game(void);
+void init_board(int board[MAX_ROW_BOARD][MAX_COL]);
+void print_cell(int board[MAX_ROW_BOARD][MAX_COL], int row, int col);
+void print_board(int board[MAX_ROW_BOARD][MAX_COL]);
+void generation(int board[MAX_ROW_BOARD][MAX_COL]);
+void sleep(int t);
+void print_int(int n, int row, int col, int attr);
+void print_up_line(void);
 
 #endif
 

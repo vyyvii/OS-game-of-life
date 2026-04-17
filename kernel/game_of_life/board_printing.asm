@@ -70,12 +70,19 @@ print_cell:                         ; Function that print a cell of the board
     mov edx, [edx]                  ; Put the value of board[row][col] in edx
 
     cmp edx, 1                      ; If board[row][col] != 1
-    jne .end                        ; End
+    jne .null                       ; go to null
     ; else continue
 
     mov eax, ' '                    ; character
     mov edx, BLACK_ON_WHITE         ; attr.
 
+    jmp .continue
+
+.null:
+    mov eax, ' '                    ; character
+    mov edx, WHITE_ON_BLACK         ; attr.
+
+.continue:
     push edx                        ; attr.
     push ecx                        ; col
     push ebx                        ; row

@@ -17,14 +17,14 @@ init_board:                         ; Function that initialise the board with al
     mov ecx, 0                      ; col
 
 row_loop:
-    cmp ebx, MAX_ROW
-    je end
+    cmp ebx, MAX_ROW_BOARD
+    jge end
 
     jmp col_loop
 
 col_loop:
     cmp ecx, MAX_COL
-    je next_row
+    jge next_row
 
     ; addr = base + (row * MAX_COL + col) * 4
     mov edx, ebx                    ; addr = row
@@ -33,7 +33,7 @@ col_loop:
     shl edx, 2                      ; addr *= 4 (bit shift left)
     add edx, eax                    ; addr += base
     ; Now we have &board[row][col]
-    mov edx, 0                      ; Put the value of board[row][col] in edx
+    mov dword [edx], 0              ; Put the value of board[row][col] in edx
 
     inc ecx
 
@@ -41,6 +41,7 @@ col_loop:
 
 next_row:
     inc ebx
+    mov ecx, 0                      ; reset col
     jmp row_loop
 
 end:

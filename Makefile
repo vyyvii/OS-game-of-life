@@ -14,7 +14,8 @@ NAME		= os-image
 KERNEL_SRC = \
 	kernel/kernel.c \
 	kernel/irq/idt.c \
-	periph/keyboard.c
+	periph/keyboard.c \
+	kernel/game_of_life/cells.c
 KERNEL_OBJ = $(KERNEL_SRC:.c=.o)
 
 KERNEL_ASM = \

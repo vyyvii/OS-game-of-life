@@ -64,6 +64,41 @@ static void handle_right(cursor_t *cursor)
         cursor->col++;
 }
 
+static void arrows(uint8_t scancode)
+{
+    extended = 0;
+    if (scancode == UP_ARROW)
+        handle_up(&cursor);
+    if (scancode == DOWN_ARROW)
+        handle_down(&cursor);
+    if (scancode == LEFT_ARROW)
+        handle_left(&cursor);
+    if (scancode == RIGHT_ARROW)
+        handle_right(&cursor);
+}
+
+static void keys(char letter)
+{
+    if (letter == 'Q')
+        outw(QUIT_QEMU, 0x2000);
+    if (letter == 'S')
+        board[cursor.row][cursor.col] = !board[cursor.row][cursor.col];
+    if (letter == 'R') {
+        init_board(&board);
+        speed = DEFAULT_SPEED;
+    }
+    if (letter == ' ')
+        go = !go;
+    if (letter == 'Z') {
+        speed--;
+        speed = (speed < MAX_SPEED) ? MAX_SPEED : speed;
+    }
+    if (letter == 'A') {
+        speed++;
+        speed = (speed > MIN_SPEED) ? MIN_SPEED : speed;
+    }
+}
+
 /**
  * @brief Function that handle the keyboard.
  * @note This function is part of the IRQ system. IRQ1 handler call this function.
@@ -73,26 +108,17 @@ void keyboard_handler(void)
     uint8_t scancode = inb(SCANCODE_REG);
     char letter = sc_ascii[(int)scancode];
 
-    if (letter == 'Q')
-        outw(QUIT_QEMU, 0x2000);
+    if (letter)
+        keys(letter);
     if (scancode == SCANCODE_EXT) {
         extended = 1;
         return;
     }
-    if (extended) {
-        extended = 0;
-        print_char(' ', cursor.row, cursor.col, WHITE_ON_BLACK);
-        if (scancode == UP_ARROW)
-            handle_up(&cursor);
-        if (scancode == DOWN_ARROW)
-            handle_down(&cursor);
-        if (scancode == LEFT_ARROW)
-            handle_left(&cursor);
-        if (scancode == RIGHT_ARROW)
-            handle_right(&cursor);
-        print_board(board);
-        put_cursor(&cursor);
-    }
+    if (extended)
+        arrows(scancode);
+    print_board(board);
+    put_cursor(&cursor);
+    print_up_line();
 }
 
 // DEFAUCHY | 2026
