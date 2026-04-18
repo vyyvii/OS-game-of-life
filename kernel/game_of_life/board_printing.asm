@@ -18,7 +18,7 @@ print_board:                        ; Function that print the board
     mov ebp, esp
 
     mov eax, [ebp + 8]              ; Board
-    mov ebx, 1                      ; row
+    mov ebx, 0                      ; row
 
 row_loop:                           ; Handle cell calling in each row & ending
     cmp ebx, MAX_ROW                ; While row < MAX_ROW
@@ -86,6 +86,8 @@ print_cell:                         ; Function that print a cell of the board
     mov edx, WHITE_ON_BLACK         ; attr.
 
 .continue:
+    inc ebx
+
     push edx                        ; attr.
     push ecx                        ; col
     push ebx                        ; row

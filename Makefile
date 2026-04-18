@@ -14,6 +14,7 @@ KERNEL_SRC 		= \
 					kernel/timer.c \
 					kernel/irq/idt.c \
 					periph/keyboard.c \
+					kernel/game_of_life/generation.c \
 					kernel/game_of_life/simulation.c
 KERNEL_OBJ 		= 	$(KERNEL_SRC:.c=.o)
 
@@ -46,6 +47,9 @@ NASM_FLAGS	=	 	-f elf32
 # ─────────────────────────────────────────────────────────────
 QEMU 	    =		qemu-system-i386
 QEMU_FLAGS 	=		-fda
+
+QEMU_x86	=		qemu-system-x86_64
+QEMU86_FLAGS=		-drive format=raw
 
 OBJCOPY 	=		i386-elf-objcopy
 OBJCP_FLAGS =		-O binary kernel/kernel.elf
@@ -108,6 +112,9 @@ $(NAME): compile_boot compile_kernel
 # ─────────────────────────────────────────────────────────────
 run_qemu: all
 	$(QEMU) $(QEMU_FLAGS) $(NAME)
+
+run_hard_qemu: all
+	$(QEMU_x86) $(QEMU86_FLAGS),file=$(NAME)
 
 # ─────────────────────────────────────────────────────────────
 # CLEANING

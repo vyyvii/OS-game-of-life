@@ -28,7 +28,7 @@
     #define RIGHT_ARROW 0x4d
 
     // SPEED
-    #define DEFAULT_SPEED 50
+    #define DEFAULT_SPEED 90
     #define MIN_SPEED 0
     #define MAX_SPEED 100
     #define BASE_PIT_FREQ 1193180
@@ -98,17 +98,22 @@ void put_cursor(cursor_t *cursor);
     // KEYBOARD
 void keyboard_handler(void);
 
-    // BOARD PRINTING
-void print_cell(int board[MAX_ROW_BOARD][MAX_COL], int row, int col);
-void print_board(int board[MAX_ROW_BOARD][MAX_COL]);
-
     // TIMER
 void timer_handler(void);
 void init_timer(uint32_t freq);
 void sleep(uint32_t ms);
 
     // GAME
+        // GENERATION
+void randomize_board(int board[MAX_ROW_BOARD][MAX_COL], int pct_cpt);
+uint32_t rand(void);
+
+        // BOARD
+void print_cell(int board[MAX_ROW_BOARD][MAX_COL], int row, int col);
+void print_board(int board[MAX_ROW_BOARD][MAX_COL]);
 void init_board(int board[MAX_ROW_BOARD][MAX_COL]);
+
+        // SIMULATION
 void generation(int board[MAX_ROW_BOARD][MAX_COL]);
 
 #endif

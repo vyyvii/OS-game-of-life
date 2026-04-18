@@ -107,6 +107,8 @@ static void keys(char letter)
         speed = (speed < MIN_SPEED) ? MIN_SPEED : speed;
         go = (speed == MIN_SPEED) ? 0 : go;
     }
+    if (letter == 'G')
+        randomize_board(board, 25);
 }
 
 /**

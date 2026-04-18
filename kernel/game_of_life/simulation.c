@@ -1,16 +1,14 @@
 // OS-Game-Of-Life
-// KERNEL FILE
+// SIMULATION FILE
 
 #include "kernel.h"
 
 /**
  * @brief Compute the next state of a cell based on its neighbors.
- *
  * Applies Conway's Game of Life rules:
  * - A dead cell becomes alive if it has exactly 3 neighbors.
  * - A living cell survives if it has 2 or 3 neighbors.
  * - Otherwise, the cell dies or remains dead.
- *
  * @param neighbors Number of alive neighboring cells.
  * @param state Current state of the cell (0 = dead, 1 = alive).
  * @return int The new state of the cell (0 = dead, 1 = alive).
@@ -26,10 +24,8 @@ static int new_state(int neighbors, int state)
 
 /**
  * @brief Count the number of alive neighbors around a specific cell.
- *
  * Iterates over the 8 surrounding cells of position (i, j),
  * ensuring boundaries are respected and excluding the cell itself.
- *
  * @param board The game board (2D array of cells).
  * @param i Row index of the target cell.
  * @param j Column index of the target cell.
@@ -53,14 +49,12 @@ static int simule_one_cell(int board[MAX_ROW_BOARD][MAX_COL], int i, int j)
 
 /**
  * @brief Compute and display the next generation of the Game of Life.
- *
  * This function:
  * 1. Computes the number of neighbors for each cell.
  * 2. Applies the Game of Life rules to update the board.
  * 3. Prints the updated board.
  * 4. Restores the cursor position.
  * 5. Waits for a short delay to control simulation speed.
- *
  * @param board The game board (2D array of cells).
  */
 void generation(int board[MAX_ROW_BOARD][MAX_COL])
@@ -77,3 +71,5 @@ void generation(int board[MAX_ROW_BOARD][MAX_COL])
     put_cursor(&cursor);
     sleep((uint32_t)abs(speed - 100));
 }
+
+// DEFAUCHY | 2026
