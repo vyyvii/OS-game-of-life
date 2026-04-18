@@ -40,5 +40,5 @@ make all-target-libgcc -j$(nproc)
 make install-gcc
 make install-target-libgcc
 
-#LE CACHEUX, RIVIERE, DEFAUCHY | 2026
+# DEFAUCHY | 2026
 
