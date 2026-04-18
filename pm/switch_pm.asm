@@ -2,6 +2,7 @@
 ; SWITCH TO PM FILE
 
 [bits 16]                   ; REAL MODE
+
 switch_to_pm:
     cli                     ; Stop CPU interrupt
     lgdt [gdt_descriptor]   ; Give to the CPU the GDT
@@ -13,6 +14,7 @@ switch_to_pm:
     jmp CODE_SEG:init_pm    ; Long jump to the protected mode to avoid pipelining
 
 [bits 32]                   ; PROTECTED MODE
+
 init_pm:
     mov ax, DATA_SEG        ; Copies registers
     mov ds, ax

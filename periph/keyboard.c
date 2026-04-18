@@ -4,7 +4,7 @@
 #include "kernel.h"
 
 static int extended = 0;
-const char sc_ascii[] = {
+static const char sc_ascii[] = {
     '?', '?', '&', '?', '"', '\'', '(', '-', '?',
     '_', '?', '?', ')', '=', '?', '?',
     'A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
@@ -64,6 +64,10 @@ static void handle_right(cursor_t *cursor)
         cursor->col++;
 }
 
+/**
+ * @brief Function that handle all of the arrows
+ * @param scancode The code of one of the arrows
+ */
 static void arrows(uint8_t scancode)
 {
     extended = 0;
@@ -77,6 +81,10 @@ static void arrows(uint8_t scancode)
         handle_right(&cursor);
 }
 
+/**
+ * @brief Function that handle the KEYS 'q', 's', 'r', ' ', 'z' & 'a'
+ * @param letter The letter
+ */
 static void keys(char letter)
 {
     if (letter == 'Q')
@@ -84,18 +92,20 @@ static void keys(char letter)
     if (letter == 'S')
         board[cursor.row][cursor.col] = !board[cursor.row][cursor.col];
     if (letter == 'R') {
-        init_board(&board);
+        init_board(board);
         speed = DEFAULT_SPEED;
     }
-    if (letter == ' ')
+    if (letter == ' ' && speed)
         go = !go;
     if (letter == 'Z') {
-        speed--;
-        speed = (speed < MAX_SPEED) ? MAX_SPEED : speed;
+        speed++;
+        speed = (speed > MAX_SPEED) ? MAX_SPEED : speed;
+        go = (speed != MIN_SPEED) ? 1 : go;
     }
     if (letter == 'A') {
-        speed++;
-        speed = (speed > MIN_SPEED) ? MIN_SPEED : speed;
+        speed--;
+        speed = (speed < MIN_SPEED) ? MIN_SPEED : speed;
+        go = (speed == MIN_SPEED) ? 0 : go;
     }
 }
 

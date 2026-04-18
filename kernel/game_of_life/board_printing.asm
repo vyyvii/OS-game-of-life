@@ -5,7 +5,10 @@
 
 global print_board                  ; Indicates print_board as a global function
 global print_cell                   ; Indicates print_cell as a global function
+global print_all                    ; Indicates print_all as a global function
 [extern print_char]                 ; Indicates print_char as an extern function
+[extern print_up_line]              ; Indicates print_up_line as an extern function
+[extern put_cursor]                 ; Indicates put_cursor as an extern function
 
 %include "include/constants.inc"    ; Include the contants (define)
 

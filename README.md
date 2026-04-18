@@ -179,10 +179,14 @@ https://wiki.osdev.org/Expanded_Main_Page
 >[!NOTE]
 > This are resources, not models
 
-
 # Contributors
 
+Main contributor:
 Victor **Defauchy**
+
+Other contributors:
+Nicolas **Rivière**
+Adrien **Le Cacheux**
 
 _LifeOS_\
 For  _OS-Game-Of-Life_  Project | 2026

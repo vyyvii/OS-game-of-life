@@ -2,6 +2,7 @@
 ; PRINT PROTECTED MODE FILE
 
 [bits 32]                   ; PROTECTED MODE
+
 print_pm:                   ; Function that print a NULL-terminated string
     pushad                  ; Copy all the registers onto the stack
     mov ax, DATA_SEG

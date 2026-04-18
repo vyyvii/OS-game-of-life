@@ -2,6 +2,7 @@
 ; GDT FILE
 
 [bits 16]                           ; PROTECTED MODE
+
 gdt_start:                          ; START SEGMENT
 
 gdt_null:                           ; NULL SEGMENT

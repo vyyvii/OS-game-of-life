@@ -1,13 +1,13 @@
 ; OS-Game-Of-Life
 ; KERNEL ENTRY FILE
 
-global _start
+[bits 32]                           ; PROTECTED MODE
 
-[bits 32]
-[extern kmain]
+global _start                       ; Indicates _start as a global function
+[extern kmain]                      ; Indicates kmain as an extern function
 
-_start:
-  call kmain
-  jmp $
+_start:                             ; Function call in boot.asm to start the kernel
+  call kmain                        ; Call the kernel
+  jmp $                             ; HANG
 
 ; DEFAUCHY | 2026

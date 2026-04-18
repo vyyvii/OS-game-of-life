@@ -2,7 +2,8 @@
 ; DISK LOAD FILE
 
 [bits 16]                       ; REAL MODE
-load_kernel:
+
+load_kernel:                    ; Function that load the kernel in memory
     pusha
 
     mov bx, KERNEL_OFFSET       ; 0x1000
@@ -22,12 +23,12 @@ load_kernel:
     popa
     ret
 
-disk_error:
+disk_error:                     ; Function printing an error message
     mov bx, MSG_ERROR
     call print_rm
     cli
     hlt
 
-MSG_ERROR db "DISK ERROR!", 0
+MSG_ERROR db "DISK ERROR!", 0   ; ERROR MESSAGE
 
 ; DEFAUCHY | 2026

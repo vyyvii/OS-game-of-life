@@ -2,6 +2,7 @@
 ; PRINT REAL MODE FILE
 
 [bits 16]                   ; REAL MODE
+
 print_rm:                   ; Function that print a NULL-terminated string
     pusha                   ; Copy all the registers onto the stack
     jmp print_character_rm  ; Enter the loop
