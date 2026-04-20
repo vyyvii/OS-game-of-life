@@ -90,7 +90,7 @@ static void keys(char letter)
     if (letter == 'Q')
         outw(QUIT_QEMU, 0x2000);
     if (letter == 'S')
-        board[cursor.row][cursor.col] = !board[cursor.row][cursor.col];
+        board[cursor.row - 1][cursor.col] = !board[cursor.row - 1][cursor.col];
     if (letter == 'R') {
         init_board(board);
         speed = DEFAULT_SPEED;
