@@ -25,7 +25,8 @@ KERNEL_ASM 		= \
 					kernel/game_of_life/board_printing.asm \
 					kernel/irq/idt_asm.asm \
 					kernel/irq/pic.asm \
-					periph/screen.asm
+					periph/screen.asm \
+					kernel/multiboot.asm
 KERNEL_ASM_OBJ 	= 	$(KERNEL_ASM:.asm=.o)
 
 BOOT 		   	= 	boot.asm

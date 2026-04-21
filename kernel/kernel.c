@@ -25,19 +25,28 @@ static void game(void)
  * @brief The main function of the KERNEL
  * @note This function is called by the bootloader by kernel_entry.asm
  */
+// void kmain(void)
+// {
+//     __asm__ volatile ("cli");               // Disable CPU interruption
+//     idt_init();                             // Initialise the IDT
+//     init_timer(BASE_FREQ);                  // Initialise the ticks (IRQ0) timer at 100Hz
+//     reset_screen();                         // Put a black screen
+//     init_board(board);                      // Initalise the board for the GAME OF LIFE
+//     print_up_line(),                        // Print the upper line (not in the board)
+//     print_board(board);                     // Print the board
+//     put_cursor(&cursor);                    // Put the cursor in the middle of the screen
+//     __asm__ volatile ("sti");               // Enable CPU interruption
+//     game();                                 // Launch the GAME OF LIFE
+//     while(1);                               // HANG
+// }
+
 void kmain(void)
 {
-    __asm__ volatile ("cli");               // Disable CPU interruption
-    idt_init();                             // Initialise the IDT
-    init_timer(BASE_FREQ);                  // Initialise the ticks (IRQ0) timer at 100Hz
-    reset_screen();                         // Put a black screen
-    init_board(board);                      // Initalise the board for the GAME OF LIFE
-    print_up_line(),                        // Print the upper line (not in the board)
-    print_board(board);                     // Print the board
-    put_cursor(&cursor);                    // Put the cursor in the middle of the screen
-    __asm__ volatile ("sti");               // Enable CPU interruption
-    game();                                 // Launch the GAME OF LIFE
-    while(1);                               // HANG
+    char *v = (char*)0xb8000;
+    v[0] = 'O';
+    v[1] = 0x0F;
+
+    while (1);
 }
 
 // DEFAUCHY | 2026
