@@ -23,7 +23,8 @@ KERNEL_ASM 		= \
 					kernel/ports.asm \
 					kernel/game_of_life/board_init.asm \
 					kernel/game_of_life/board_printing.asm \
-					kernel/game_of_life/simulation_asm.asm \
+					kernel/game_of_life/simule_one_cell.asm \
+					kernel/game_of_life/new_state.asm \
 					kernel/irq/idt_asm.asm \
 					kernel/irq/pic.asm \
 					periph/screen.asm

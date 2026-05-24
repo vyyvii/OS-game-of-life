@@ -1,5 +1,5 @@
 ; OS-Game-Of-Life
-; SIMULATION FILE
+; SIMULE_ONE_CELL FILE
 
 [bits 32]                           ; PROTECTED MODE
 
@@ -11,22 +11,25 @@ global simule_one_cell              ; Indicates simule_one_cell as a global func
 ; \/                   \/
 ;       board => edx
 ;       i => esi
-;       j => [ebp - 4]
+;       j => [ebp - 4] (stack)
 ;       ii => ebx
 ;       jj => edi
 ;       cpt => ecx
 ;       tmp => eax
 ; ========================
-
 simule_one_cell:                    ; Count the number of alive neighbors around a specific cell.
     push ebp
     mov ebp, esp
 
+    push ebx
+    push esi
+    push edi
+
     sub esp, 4                      ; SAVE SPACE ON STACK
 
     mov edx, [ebp + 8]              ; board
-    mov esi, [ebp + 12]             ; i, Row index of the target cell
-    mov eax, [ebp + 16]             ; j, Column index of the target cell
+    mov esi, [ebp + 12]             ; i | Row index of the target cell
+    mov eax, [ebp + 16]             ; j | Column index of the target cell
     mov [ebp - 4], eax              ; save j locally
 
     mov ecx, 0                      ; cpt = 0
@@ -96,9 +99,16 @@ ii_next:
     jmp ii_loop
 
 end:
+    mov eax, ecx                    ; CONVENTION: return value in eax
+
+    add esp, 4                      ; free local variable
+
+    pop edi
+    pop esi
+    pop ebx
+
     mov esp, ebp
     pop ebp
-    mov eax, ecx                    ; CONVENTION: return value in eax
-    ret                             ; Number of alive neighboring cells
+    ret                             ; INT | Number of alive neighboring cells
 
 ; DEFAUCHY - RIVIERE | 2026

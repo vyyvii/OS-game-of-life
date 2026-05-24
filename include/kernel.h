@@ -114,6 +114,7 @@ void print_board(int board[MAX_ROW_BOARD][MAX_COL]);
 void init_board(int board[MAX_ROW_BOARD][MAX_COL]);
 
         // SIMULATION
+int new_state(int neighbors, int state);
 int simule_one_cell(int board[MAX_ROW_BOARD][MAX_COL], int i, int j);
 void simulation(int board[MAX_ROW_BOARD][MAX_COL]);
 

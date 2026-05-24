@@ -14,13 +14,13 @@ global print_cell                   ; Indicates print_cell as a global function
 ;       board => eax
 ;       row => ebx
 ;       col => ecx
-;       tmp => edx
 ; ========================
-
 print_board:                        ; Function that print the board
     ; NOTE: VGA text mode is 25 by 80 cells large, but here, the first line is infos.
     push ebp
     mov ebp, esp
+
+    push ebx
 
     mov eax, [ebp + 8]              ; Board
     mov ebx, 0                      ; row
@@ -57,12 +57,24 @@ next_row:
     jmp row_loop                    ; Continue with an other row
 
 end:                                ; End the function
+    pop ebx
+
+    mov esp, ebp
     pop ebp
     ret                             ; void
 
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       board => eax
+;       row => ebx
+;       col => ecx
+;       tmp => edx
+; ========================
 print_cell:                         ; Function that print a cell of the board
     push ebp
     mov ebp, esp
+
+    push ebx
 
     mov eax, [ebp + 8]              ; board
     mov ebx, [ebp + 12]             ; row
@@ -101,6 +113,9 @@ print_cell:                         ; Function that print a cell of the board
     add esp, 16                     ; Clean stack
 
 .end:
+    pop ebx
+
+    mov esp, ebp
     pop ebp
     ret                             ; void
 

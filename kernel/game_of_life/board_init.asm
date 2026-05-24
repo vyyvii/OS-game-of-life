@@ -14,10 +14,11 @@ global init_board                   ; Indicates print_board as a global function
 ;       col => ecx
 ;       tmp => edx
 ; ========================
-
 init_board:                         ; Function that initialise the board with all the cells in the state 0
     push ebp
     mov ebp, esp
+
+    push ebx
 
     mov eax, [ebp + 8]              ; board
     mov ebx, 0                      ; row
@@ -40,7 +41,7 @@ col_loop:
     shl edx, 2                      ; addr *= 4 (bit shift left)
     add edx, eax                    ; addr += base
     ; Now we have &board[row][col]
-    mov edx, [edx]                  ; Put the value of board[row][col] in edx
+    mov dword [edx], 0              ; Put the value of board[row][col] in edx
 
     inc ecx                         ; col++
 
@@ -52,6 +53,9 @@ next_row:
     jmp row_loop
 
 end:
+    pop ebx
+
+    mov esp, ebp
     pop ebp
     ret                             ; void
 

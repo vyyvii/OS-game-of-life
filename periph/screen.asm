@@ -17,19 +17,19 @@ global put_cursor               ; Indicates put_cursor as a global function
 ;       col => ecx
 ;       attr => edx
 ;       VIDEO_MEMORY => edi
-;       str => esi
 ; ========================
 
 print_char:                     ; Write a character (eax) on the screen
     push ebp
     mov ebp, esp
+
+    push ebx
+    push edi
+
     mov eax, [ebp + 8]          ; c
     mov ebx, [ebp + 12]         ; row
     mov ecx, [ebp + 16]         ; col
     mov edx, [ebp + 20]         ; attr
-
-    push ebx                    ; Save is own registers (row)
-    push edi                    ; Save is own registers (video_memory)
 
     imul ebx, MAX_COL           ; Declare the offset
     add ebx, ecx                ; 2 * (row * 80 + col)
@@ -39,23 +39,33 @@ print_char:                     ; Write a character (eax) on the screen
     add edi, ebx                ; Move the c to edi
 
     cmp dl, 0                   ; dl is the attribut
-    jne write_char              ; If the character have an attr. go to write_char
+    jne .write_char              ; If the character have an attr. go to write_char
 
     mov dl, WHITE_ON_BLACK      ; else put WHITE_ON_BLACK as attr.
 
-write_char:
+.write_char:
     mov [edi], al               ; al is the character to print
     mov [edi + 1], dl           ; Attr.
 
     pop edi
     pop ebx
 
+    mov esp, ebp
     pop ebp
     ret                         ; void
 
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       str => esi
+;       row => ebx
+;       col => ecx
+;       attr => edx
+; ========================
 print_string:                   ; Write a string on the screen
     push ebp
     mov ebp, esp
+
+    push ebx
 
     mov esi, [ebp + 8]          ; str
     mov ebx, [ebp + 12]         ; row
@@ -89,22 +99,28 @@ print_string:                   ; Write a string on the screen
     jmp .loop                   ; And continue printing
 
 .end:
+    pop ebx
+
+    mov esp, ebp
     pop ebp
     ret                         ; void
 
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       Total bytes on screen => ecx
+;       VIDEO_MEMORY => edi
+; ========================
 reset_screen:                   ; Reset the screen. Black screen.
     push ebp
     mov ebp, esp
 
-    push edi                    ; Save is own registers (video_memory)
+    push edi
 
     mov edi, VIDEO_MEMORY
 
     mov ecx, MAX_COL
     imul ecx, MAX_ROW
     shl ecx, 1                  ; Total bytes on screen
-
-    mov eax, 0                  ; Put eax to 0
 
 .loop:
     cmp ecx, 0
@@ -119,15 +135,24 @@ reset_screen:                   ; Reset the screen. Black screen.
 .end:
     pop edi
 
+    mov esp, ebp
     pop ebp
     ret                         ; void
 
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       Cursor adress => eax
+;       row => ebx
+;       col => ecx
+;       color => edx
+; ========================
 put_cursor:                     ; Print the cursor
     push ebp
     mov ebp, esp
 
-    mov eax, [ebp + 8]          ; Cursor adress (stucture cursor_t)
+    push ebx
 
+    mov eax, [ebp + 8]          ; Cursor adress (stucture cursor_t)
     mov ebx, [eax]              ; row
     mov ecx, [eax + 4]          ; col
     mov edx, [eax + 8]          ; color
@@ -141,6 +166,9 @@ put_cursor:                     ; Print the cursor
     call print_char
     add esp, 16                 ; Clean stack
 
+    pop ebx
+
+    mov esp, ebp
     pop ebp
     ret                         ; void
 

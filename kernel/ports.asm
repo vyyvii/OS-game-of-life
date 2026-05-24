@@ -13,7 +13,6 @@ global inw                          ; Indicates inw as a global function
 ;       port => edx
 ;       data => eax
 ; ========================
-
 outb:                               ; Write a byte into the specified port
     push ebp
     mov ebp, esp
@@ -26,6 +25,11 @@ outb:                               ; Write a byte into the specified port
     pop ebp
     ret
 
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       port => edx
+;       data => eax
+; ========================
 outw:                               ; Write a word into the specified port
     push ebp
     mov ebp, esp
@@ -38,6 +42,11 @@ outw:                               ; Write a word into the specified port
     pop ebp
     ret
 
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       port => edx
+;       data => eax
+; ========================
 inb:                                ; Read a byte from the specified port
     push ebp
     mov ebp, esp
@@ -49,6 +58,11 @@ inb:                                ; Read a byte from the specified port
     pop ebp
     ret
 
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       port => edx
+;       data => eax
+; ========================
 inw:                                ; Read a word from the specified port
     push ebp
     mov ebp, esp

@@ -4,25 +4,6 @@
 #include "kernel.h"
 
 /**
- * @brief Compute the next state of a cell based on its neighbors.
- * Applies Conway's Game of Life rules:
- * - A dead cell becomes alive if it has exactly 3 neighbors.
- * - A living cell survives if it has 2 or 3 neighbors.
- * - Otherwise, the cell dies or remains dead.
- * @param neighbors Number of alive neighboring cells.
- * @param state Current state of the cell (0 = dead, 1 = alive).
- * @return int The new state of the cell (0 = dead, 1 = alive).
- */
-static int new_state(int neighbors, int state)
-{
-    if (state == 0 && neighbors == 3)
-        return 1;
-    if (state == 1)
-        return (neighbors < 2 || neighbors > 3) ? 0 : 1;
-    return 0;
-}
-
-/**
  * @brief Compute and display the next generation of the Game of Life.
  * This function:
  * 1. Computes the number of neighbors for each cell.

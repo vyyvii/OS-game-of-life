@@ -10,11 +10,6 @@ global irq1_handler                 ; Indicates irq1_handler as a global functio
 
 %include "include/constants.inc"    ; Include the contants (define)
 
-; || REGISTERS MAPPING ||
-; \/                   \/
-;       EAX ax-ah-al
-; ========================
-
 irq0_handler:                       ; Handle the timer interruption
     pusha                           ; Save registers
 
