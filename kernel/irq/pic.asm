@@ -57,4 +57,4 @@ pic_remap:                          ; Remap the PIC because default value of the
     pop ebp
     ret
 
-; DEFAUCHY | 2026
+; DEFAUCHY - RIVIERE | 2026

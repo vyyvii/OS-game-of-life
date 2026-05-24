@@ -1,5 +1,5 @@
 // OS-Game-Of-Life
-// SIMULATION FILE
+// GENERATION FILE
 
 #include "kernel.h"
 
@@ -47,4 +47,4 @@ uint32_t rand(void)
     return seed;
 }
 
-// DEFAUCHY | 2026
+// DEFAUCHY - RIVIERE | 2026

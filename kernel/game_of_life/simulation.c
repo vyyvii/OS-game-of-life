@@ -23,31 +23,6 @@ static int new_state(int neighbors, int state)
 }
 
 /**
- * @brief Count the number of alive neighbors around a specific cell.
- * Iterates over the 8 surrounding cells of position (i, j),
- * ensuring boundaries are respected and excluding the cell itself.
- * @param board The game board (2D array of cells).
- * @param i Row index of the target cell.
- * @param j Column index of the target cell.
- * @return int Number of alive neighboring cells.
- */
-static int simule_one_cell(int board[MAX_ROW_BOARD][MAX_COL], int i, int j)
-{
-    int cpt = 0;
-
-    for (int ii = i - 1; ii <= i + 1; ii++) {
-        if (ii < 0 || ii >= MAX_ROW_BOARD)
-            continue;
-        for (int jj = j - 1; jj <= j + 1; jj++) {
-            if (jj < 0 || jj >= MAX_COL || (ii == i && jj == j))
-                continue;
-            cpt = (board[ii][jj] == 1) ? cpt + 1 : cpt;
-        }
-    }
-    return cpt;
-}
-
-/**
  * @brief Compute and display the next generation of the Game of Life.
  * This function:
  * 1. Computes the number of neighbors for each cell.
@@ -72,4 +47,4 @@ void generation(int board[MAX_ROW_BOARD][MAX_COL])
     sleep((uint32_t)abs(speed - 100));
 }
 
-// DEFAUCHY | 2026
+// DEFAUCHY - RIVIERE | 2026

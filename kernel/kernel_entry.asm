@@ -10,4 +10,4 @@ _start:                             ; Function call in boot.asm to start the ker
   call kmain                        ; Call the kernel
   jmp $                             ; HANG
 
-; DEFAUCHY | 2026
+; DEFAUCHY - RIVIERE | 2026

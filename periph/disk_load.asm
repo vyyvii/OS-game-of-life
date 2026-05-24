@@ -31,4 +31,4 @@ disk_error:                     ; Function printing an error message
 
 MSG_ERROR db "DISK ERROR!", 0   ; ERROR MESSAGE
 
-; DEFAUCHY | 2026
+; DEFAUCHY - RIVIERE | 2026

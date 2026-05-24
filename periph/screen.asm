@@ -134,4 +134,4 @@ put_cursor:                     ; Print the cursor
     pop ebp
     ret
 
-; DEFAUCHY | 2026
+; DEFAUCHY - RIVIERE | 2026

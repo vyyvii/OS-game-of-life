@@ -7,6 +7,13 @@ global init_board                   ; Indicates print_board as a global function
 
 %include "include/constants.inc"    ; Include the contants (define)
 
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       board => eax
+;       row => ebx
+;       col => ecx
+;       tmp => edx
+; ========================
 
 init_board:                         ; Function that initialise the board with all the cells in the state 0
     push ebp
@@ -18,13 +25,13 @@ init_board:                         ; Function that initialise the board with al
 
 row_loop:
     cmp ebx, MAX_ROW_BOARD
-    jge end
+    jge end                         ; if row >= MAX_ROW_BOARD
 
     jmp col_loop
 
 col_loop:
     cmp ecx, MAX_COL
-    jge next_row
+    jge next_row                    ; if col >= MAX_COL
 
     ; addr = base + (row * MAX_COL + col) * 4
     mov edx, ebx                    ; addr = row
@@ -33,19 +40,19 @@ col_loop:
     shl edx, 2                      ; addr *= 4 (bit shift left)
     add edx, eax                    ; addr += base
     ; Now we have &board[row][col]
-    mov dword [edx], 0              ; Put the value of board[row][col] in edx
+    mov edx, [edx]                  ; Put the value of board[row][col] in edx
 
-    inc ecx
+    inc ecx                         ; col++
 
     jmp col_loop
 
 next_row:
-    inc ebx
+    inc ebx                         ; row++
     mov ecx, 0                      ; reset col
     jmp row_loop
 
 end:
     pop ebp
-    ret
+    ret                             ; void
 
-; DEFAUCHY | 2026
+; DEFAUCHY - RIVIERE | 2026

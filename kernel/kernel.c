@@ -40,4 +40,4 @@ void kmain(void)
     while(1);                               // HANG
 }
 
-// DEFAUCHY | 2026
+// DEFAUCHY - RIVIERE | 2026

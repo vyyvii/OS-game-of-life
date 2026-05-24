@@ -80,4 +80,4 @@ void init_timer(uint32_t freq)
     outb(0x40, (divisor >> 8) & 0xFF);
 }
 
-// DEFAUCHY | 2026
+// DEFAUCHY - RIVIERE | 2026

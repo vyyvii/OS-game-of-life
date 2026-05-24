@@ -40,5 +40,5 @@ make all-target-libgcc -j$(nproc)
 make install-gcc
 make install-target-libgcc
 
-# DEFAUCHY | 2026
+# DEFAUCHY - RIVIERE | 2026
 

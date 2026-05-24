@@ -5,12 +5,19 @@
 
 global print_board                  ; Indicates print_board as a global function
 global print_cell                   ; Indicates print_cell as a global function
-global print_all                    ; Indicates print_all as a global function
 [extern print_char]                 ; Indicates print_char as an extern function
 [extern print_up_line]              ; Indicates print_up_line as an extern function
 [extern put_cursor]                 ; Indicates put_cursor as an extern function
 
 %include "include/constants.inc"    ; Include the contants (define)
+
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       board => eax
+;       row => ebx
+;       col => ecx
+;       tmp => edx
+; ========================
 
 print_board:                        ; Function that print the board
     ; NOTE: VGA text mode is 25 by 80 cells large, but here, the first line is infos.
@@ -53,7 +60,7 @@ next_row:
 
 end:                                ; End the function
     pop ebp
-    ret
+    ret                             ; void
 
 print_cell:                         ; Function that print a cell of the board
     push ebp
@@ -97,6 +104,6 @@ print_cell:                         ; Function that print a cell of the board
 
 .end:
     pop ebp
-    ret
+    ret                             ; void
 
-; DEFAUCHY | 2026
+; DEFAUCHY - RIVIERE | 2026

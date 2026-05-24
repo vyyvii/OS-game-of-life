@@ -16,4 +16,4 @@ typedef signed int int32_t;
 
 #endif
 
-// DEFAUCHY | 2026
+// DEFAUCHY - RIVIERE | 2026
