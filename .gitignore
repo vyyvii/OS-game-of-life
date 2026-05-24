@@ -5,6 +5,7 @@
 *.xz
 *.elf
 
+# Compilation output
 binutils-2.42
 build-binutils
 gcc-13.2.0
@@ -16,3 +17,5 @@ gcc-13.2.0
 gcc-13.2.0
 build-binutils
 binutils-2.42
+
+# DEFAUCHY - RIVIERE | 2026

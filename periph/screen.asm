@@ -10,6 +10,16 @@ global put_cursor               ; Indicates put_cursor as a global function
 
 %include "include/constants.inc"; Include the contants (define)
 
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       c => eax
+;       row => ebx
+;       col => ecx
+;       attr => edx
+;       VIDEO_MEMORY => edi
+;       str => esi
+; ========================
+
 print_char:                     ; Write a character (eax) on the screen
     push ebp
     mov ebp, esp
@@ -41,7 +51,7 @@ write_char:
     pop ebx
 
     pop ebp
-    ret
+    ret                         ; void
 
 print_string:                   ; Write a string on the screen
     push ebp
@@ -80,7 +90,7 @@ print_string:                   ; Write a string on the screen
 
 .end:
     pop ebp
-    ret
+    ret                         ; void
 
 reset_screen:                   ; Reset the screen. Black screen.
     push ebp
@@ -110,7 +120,7 @@ reset_screen:                   ; Reset the screen. Black screen.
     pop edi
 
     pop ebp
-    ret
+    ret                         ; void
 
 put_cursor:                     ; Print the cursor
     push ebp
@@ -132,6 +142,6 @@ put_cursor:                     ; Print the cursor
     add esp, 16                 ; Clean stack
 
     pop ebp
-    ret
+    ret                         ; void
 
 ; DEFAUCHY - RIVIERE | 2026

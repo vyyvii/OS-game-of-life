@@ -26,8 +26,8 @@ load_kernel:                    ; Function that load the kernel in memory
 disk_error:                     ; Function printing an error message
     mov bx, MSG_ERROR
     call print_rm
-    cli
-    hlt
+    cli                         ; Disable CPU interruptions
+    hlt                         ; HOLD
 
 MSG_ERROR db "DISK ERROR!", 0   ; ERROR MESSAGE
 

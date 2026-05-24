@@ -1,5 +1,5 @@
 ; OS-Game-Of-Life
-; GDT FILE
+; IDT FILE
 
 [bits 32]                           ; PROTECTED MODE
 global irq0_handler                 ; Indicates irq0_handler as a global function
@@ -9,6 +9,11 @@ global irq1_handler                 ; Indicates irq1_handler as a global functio
 [extern] timer_handler              ; Make the timer_handler function callable in this asm file
 
 %include "include/constants.inc"    ; Include the contants (define)
+
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       EAX ax-ah-al
+; ========================
 
 irq0_handler:                       ; Handle the timer interruption
     pusha                           ; Save registers

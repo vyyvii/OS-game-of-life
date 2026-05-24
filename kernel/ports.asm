@@ -8,6 +8,12 @@ global outw                         ; Indicates outw as a global function
 global inb                          ; Indicates inb as a global function
 global inw                          ; Indicates inw as a global function
 
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       port => edx
+;       data => eax
+; ========================
+
 outb:                               ; Write a byte into the specified port
     push ebp
     mov ebp, esp

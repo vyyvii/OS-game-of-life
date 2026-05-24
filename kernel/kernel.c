@@ -16,9 +16,9 @@ volatile uint32_t ticks = 0;                // Ticks (IRQ0)
  */
 static void game(void)
 {
-    while (1)
+    while (1)                               // HANG
         if (go)
-            generation(board);
+            simulation(board);
 }
 
 /**
@@ -37,7 +37,7 @@ void kmain(void)
     put_cursor(&cursor);                    // Put the cursor in the middle of the screen
     __asm__ volatile ("sti");               // Enable CPU interruption
     game();                                 // Launch the GAME OF LIFE
-    while(1);                               // HANG
+    while(1);                               // HANG (last security)
 }
 
 // DEFAUCHY - RIVIERE | 2026

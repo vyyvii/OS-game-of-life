@@ -32,7 +32,7 @@ static int new_state(int neighbors, int state)
  * 5. Waits for a short delay to control simulation speed.
  * @param board The game board (2D array of cells).
  */
-void generation(int board[MAX_ROW_BOARD][MAX_COL])
+void simulation(int board[MAX_ROW_BOARD][MAX_COL])
 {
     int matrice[MAX_ROW_BOARD][MAX_COL];
 

@@ -115,7 +115,7 @@ void init_board(int board[MAX_ROW_BOARD][MAX_COL]);
 
         // SIMULATION
 int simule_one_cell(int board[MAX_ROW_BOARD][MAX_COL], int i, int j);
-void generation(int board[MAX_ROW_BOARD][MAX_COL]);
+void simulation(int board[MAX_ROW_BOARD][MAX_COL]);
 
 #endif
 

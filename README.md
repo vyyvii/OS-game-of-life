@@ -183,9 +183,9 @@ https://wiki.osdev.org/Expanded_Main_Page
 
 Main contributor:
 Victor **Defauchy**
+Nicolas **Rivière**
 
 Other contributors:
-Nicolas **Rivière**
 Adrien **Le Cacheux**
 
 _LifeOS_\

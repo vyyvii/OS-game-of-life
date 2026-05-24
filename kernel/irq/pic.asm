@@ -7,6 +7,12 @@ global pic_remap                    ; Indicates pic_remap as a global function
 
 %include "include/constants.inc"    ; Include the contants (define)
 
+; || REGISTERS MAPPING ||
+; \/                   \/
+;       EAX ax-ah-al
+;       EDX dx-dh-dl
+; ========================
+
 pic_remap:                          ; Remap the PIC because default value of the PIC are mapped with CPU registers value.
     push ebp
     mov ebp, esp
@@ -55,6 +61,6 @@ pic_remap:                          ; Remap the PIC because default value of the
     out dx, al
 
     pop ebp
-    ret
+    ret                            ; void
 
 ; DEFAUCHY - RIVIERE | 2026
