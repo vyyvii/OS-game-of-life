@@ -14,8 +14,7 @@ KERNEL_SRC 		= \
 					kernel/timer.c \
 					kernel/irq/idt.c \
 					periph/keyboard.c \
-					kernel/game_of_life/generation.c \
-					kernel/game_of_life/simulation.c
+					kernel/game_of_life/generation.c
 KERNEL_OBJ 		= 	$(KERNEL_SRC:.c=.o)
 
 KERNEL_ASM 		= \
@@ -24,6 +23,7 @@ KERNEL_ASM 		= \
 					kernel/game_of_life/board_init.asm \
 					kernel/game_of_life/board_printing.asm \
 					kernel/game_of_life/simule_one_cell.asm \
+					kernel/game_of_life/simulation.asm \
 					kernel/game_of_life/new_state.asm \
 					kernel/irq/idt_asm.asm \
 					kernel/irq/pic.asm \
