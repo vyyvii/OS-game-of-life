@@ -20,7 +20,7 @@ print_character_pm:
     cmp al, 0               ; Compare this character to 0
     je done_pm              ; If equal, exit the loop
 
-    mov [edi], ax           ; Tele-type BIOS routine
+    mov [edi], ax
 
     add edi, 2
     inc ebx
