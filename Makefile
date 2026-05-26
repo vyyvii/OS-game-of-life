@@ -126,7 +126,6 @@ re: fclean all
 # ─────────────────────────────────────────────────────────────
 # PHONY TARGETS
 # ─────────────────────────────────────────────────────────────
-.phony: install_base install_and_config_all compile_boot compile_kernel \
-	run_qemu update_repo clean fclean all re
+.phony: install_base install_and_config_all compile_boot compile_kernel run_qemu clean fclean all re
 
 # DEFAUCHY - RIVIERE | 2026
