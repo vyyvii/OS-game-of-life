@@ -4,13 +4,15 @@
 [bits 32]                   ; PROTECTED MODE
 
 print_pm:                   ; Function that print a NULL-terminated string
-    pushad                  ; Copy all the registers onto the stack
+    pushad                  ; Copy all the registers into the stack
+
     mov ax, DATA_SEG
     mov ds, ax
-    mov eax, ecx
-    imul eax, 80
-    shl eax, 1
-    add eax, 0xb8000
+
+    mov eax, ecx            ; Set eax to the number of line (current)
+    imul eax, 80            ; Multiplies by the number of column
+    shl eax, 1              ; Multiplies by two
+    add eax, 0xb8000        ; VIDEO MEMORY (VGA)
     mov edi, eax
 
 print_character_pm:

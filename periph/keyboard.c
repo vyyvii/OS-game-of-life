@@ -70,7 +70,6 @@ static void handle_right(cursor_t *cursor)
  */
 static void arrows(uint8_t scancode)
 {
-    extended = 0;
     if (scancode == UP_ARROW)
         handle_up(&cursor);
     if (scancode == DOWN_ARROW)
@@ -79,6 +78,20 @@ static void arrows(uint8_t scancode)
         handle_left(&cursor);
     if (scancode == RIGHT_ARROW)
         handle_right(&cursor);
+    refresh_screen(board);
+}
+
+/**
+ * @brief Reset the screen and halt the CPU.
+ * @note While stop a computer is a hard task, halt it & print a message is way easier.
+ */
+static void quit_screen_real(void)
+{
+    reset_screen();
+    print_string("LifeOS stopped. You may now power off the computer.", 12, 15, WHITE_ON_BLACK);
+    __asm__ volatile("cli");                   // Disable CPU interruptions
+    while (1)                                  // HANG
+        __asm__ volatile("hlt");               // Halt the CPU
 }
 
 /**
@@ -87,8 +100,10 @@ static void arrows(uint8_t scancode)
  */
 static void keys(char letter)
 {
-    if (letter == 'Q')
-        outw(QUIT_QEMU, 0x2000);
+    if (letter == 'Q') {
+        outw(QUIT_QEMU, 0x2000);                // Stop the OS on qemu (only works on qemu)
+        quit_screen_real();                     // Else, go to quit_screen_real
+    }
     if (letter == 'S')
         board[cursor.row - 1][cursor.col] = !board[cursor.row - 1][cursor.col];
     if (letter == 'R') {
@@ -112,25 +127,39 @@ static void keys(char letter)
 }
 
 /**
- * @brief Function that handle the keyboard.
+ * @brief Function that handle the keyboard. SET1 only (PS/2)
+ */
+void scancode_handler(voir)
+{
+    uint8_t scancode = inb(SCANCODE_REG);           // Read the scancode
+
+    if (scancode == SCANCODE_EXT) {                 // If it is an extended scancode (arrows)...
+        extended = 1;                               // ...put global variables extended to one
+        return;                                     // Return to be ready to catch the real value
+    }
+    if (extended) {
+        if (scancode == SCANCODE_FAKE_PRESS || scancode == SCANCODE_FAKE_RELEASE)
+            return;                                 // On some computer, we can deal with fake scancode arround the real one
+        extended = 0;
+        if (scancode & RELASE_MASK)                 // If scancode & 0x80 == 0, it mean that the key is just realease, so skip
+            return;
+        arrows(scancode);                           // Handle the correct arrow
+    }
+    if (scancode & RELASE_MASK || scancode >= sizeof(sc_ascii))
+        return;                                     // Check for the release & the out of range value
+    keys(sc_ascii[scancode]);                       // Handle the correct key
+    refresh_screen(board);
+}
+
+/**
+ * @brief Function that handle the keyboard. Empty the IRQ1 buffer by calling
+ * the function while the status byte (0x64) is still to one.
  * @note This function is part of the IRQ system. IRQ1 handler call this function.
  */
 void keyboard_handler(void)
 {
-    uint8_t scancode = inb(SCANCODE_REG);
-    char letter = sc_ascii[(int)scancode];
-
-    if (letter)
-        keys(letter);
-    if (scancode == SCANCODE_EXT) {
-        extended = 1;
-        return;
-    }
-    if (extended)
-        arrows(scancode);
-    print_board(board);
-    put_cursor(&cursor);
-    print_up_line();
+    while (inb(SCANCODE_STATUS) & 1)
+        scancode_handler();
 }
 
 // DEFAUCHY - RIVIERE | 2026

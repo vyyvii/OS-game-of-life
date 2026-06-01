@@ -66,4 +66,16 @@ void print_up_line(void)
     // |01    6     2             6     2    7 9  2     8           0       8            0|
 }
 
+/**
+ * @brief Wrap a set of usefull functions calls.
+ * @param board The board of the game.
+ * @note This refresh the all board.
+ */
+void refresh_screen(int board[MAX_ROW_BOARD][MAX_COL])
+{
+    print_board(board);
+    put_cursor(&cursor);
+    print_up_line();
+}
+
 // DEFAUCHY - RIVIERE | 2026

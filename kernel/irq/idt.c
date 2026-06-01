@@ -39,10 +39,10 @@ void idt_init(void)
     }
     idt_descriptor.limit = sizeof(idt) - 1;
     idt_descriptor.base  = (uint32_t)&idt;
-    __asm__ __volatile__("lidtl (%0)" : : "r" (&idt_descriptor));
-    pic_remap();        // REMAP the PIC (Programmable Interrupt Transistor)
-    idt_set_gate(0x20, (uint32_t)irq0_handler);
-    idt_set_gate(0x21, (uint32_t)irq1_handler);
+    pic_remap();                                                    // REMAP the PIC (Programmable Interrupt Transistor)
+    idt_set_gate(0x20, (uint32_t)irq0_handler);                     // Map the first gate on IRQ0
+    idt_set_gate(0x21, (uint32_t)irq1_handler);                     // Map the seconde gate on IRQ1
+    __asm__ __volatile__("lidtl (%0)" : : "r" (&idt_descriptor));   // Declare the IDT
 }
 
 // DEFAUCHY - RIVIERE | 2026

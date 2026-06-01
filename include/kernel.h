@@ -7,8 +7,8 @@
     // ATTRIBUTES
     #define WHITE_ON_BLACK 0x0f
     #define BLACK_ON_WHITE 0xf0
-    #define WHITE_ON_GRAY 0x8f
-    #define FULL_GRAY 0x88
+    #define WHITE_ON_GRAY 0x7f
+    #define FULL_GRAY 0x77
 
     // ROWS & COLS
     #define MAX_ROW 25
@@ -16,8 +16,13 @@
     #define MAX_COL 80
 
     // SCANCODES & SPECIALS REGS
+        // NOTES: scancodes are the set1 of PS/2 keyboards
     #define SCANCODE_REG 0x60
     #define SCANCODE_EXT 0xe0
+    #define SCANCODE_STATUS 0x64
+    #define SCANCODE_FAKE_PRESS 0x2a
+    #define SCANCODE_FAKE_RELEASE 0xaa
+    #define RELASE_MASK 0x80
     #define PIC_MASTER 0x20
     #define VIDEO_MEMORY 0xB8000
 
@@ -81,6 +86,7 @@ void pic_remap(void);
     // AUX
 void print_int(int n, int row, int col, int attr);
 void print_up_line(void);
+void refresh_screen(int board[MAX_ROW_BOARD][MAX_COL]);
 int abs(int nb);
 
     // PORTS

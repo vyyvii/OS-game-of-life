@@ -24,10 +24,10 @@ irq0_handler:                       ; Handle the timer interruption
 irq1_handler:                       ; Handle the keyboard interruption
     pusha                           ; Save registers
 
-    call keyboard_handler           ; Call the function that will handle the keyboard
-
     mov al, PIC_MASTER              ; EOI PIC master
     out PIC_MASTER, al
+
+    call keyboard_handler           ; Call the function that will handle the keyboard
 
     popa                            ; Restore registers
     iret                            ; Return

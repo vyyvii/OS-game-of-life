@@ -53,6 +53,7 @@ inb:                                ; Read a byte from the specified port
 
     mov edx, [ebp + 8]              ; port
 
+    xor eax, eax
     in al, dx
 
     pop ebp
@@ -69,6 +70,7 @@ inw:                                ; Read a word from the specified port
 
     mov edx, [ebp + 8]              ; port
 
+    xor eax, eax
     in ax, dx
 
     pop ebp
