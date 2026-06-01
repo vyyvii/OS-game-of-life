@@ -7,7 +7,7 @@
 [bits 16]                       ; REAL MODE
 [org 0x7c00]
 
-KERNEL_OFFSET equ 0x1000
+%include "include/constants.inc"; Include the contants (define)
 
 start:
     cli                         ; Disable CPU interruptions
@@ -25,7 +25,7 @@ start:
     mov bx, MSG_REAL_MODE       ; Load the string into bx
     call print_rm               ; Print bx
 
-    call load_kernel            ;  Load the kernel
+    call load_kernel            ; Load the kernel
 
     call switch_to_pm           ; Go from real to protected mode
 
@@ -44,6 +44,7 @@ start:
 ; PROTECTED MODE
 ; ===============================
 [bits 32]
+
 BEGIN_PM:
     push ebx                    ; ebx (& esi/edi) are callee-saved...
 
@@ -61,7 +62,7 @@ BEGIN_PM:
 ; GLOBAL VARIABLES
 ; ===============================
 BOOT_DRIVE db 0
-MSG_REAL_MODE db "Started in 16-bit Real Mode", 0x0d, 0x0a, 0
+MSG_REAL_MODE db "Started in 16-bit Real Mode", 0
 MSG_PROT_MODE db "32-bit Protected Mode", 0
 
 ; ===============================
