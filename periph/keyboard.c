@@ -124,7 +124,7 @@ static void keys(char letter)
     }
     if (letter == 'G')
         randomize_board(board, 25);
-    if (letter == 'C')
+    if (letter == 'D')
         demo_mode(board);
 }
 

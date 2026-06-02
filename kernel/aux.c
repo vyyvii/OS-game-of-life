@@ -157,6 +157,7 @@ static void right(int board[MAX_ROW_BOARD][MAX_COL])
  */
 void demo_mode(int board[MAX_ROW_BOARD][MAX_COL])
 {
+    init_board(board);
     left(board);
     right(board);
 }
