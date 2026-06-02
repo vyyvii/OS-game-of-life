@@ -7,7 +7,7 @@ load_kernel:                    ; Function that load the kernel in memory
     pusha
 
     mov bx, KERNEL_OFFSET       ; 0x1000
-    mov dh, 7                   ; sectors = (kernel_size + 511) / 512 = 3699 / 512 =~ 7
+    mov dh, 10                  ; sectors = (kernel_size + 511) / 512 = 4903 / 512 =~ 10
     mov dl, [BOOT_DRIVE]
 
     mov ah, 0x02

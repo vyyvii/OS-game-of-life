@@ -88,6 +88,7 @@ void print_int(int n, int row, int col, int attr);
 void print_up_line(void);
 void refresh_screen(int board[MAX_ROW_BOARD][MAX_COL]);
 int abs(int nb);
+void demo_mode(int board[MAX_ROW_BOARD][MAX_COL]);
 
     // PORTS
 void outb(uint16_t port, uint8_t data);

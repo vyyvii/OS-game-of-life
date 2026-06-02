@@ -49,7 +49,7 @@ void print_up_line(void)
     for (int i = 0; i < MAX_COL; i++)
         print_char(' ', 0, i, WHITE_ON_GRAY);
     print_string("LifeOS", 0, 1, WHITE_ON_GRAY);
-    print_string("Victor Defauchy", 0, 12, WHITE_ON_GRAY);
+    print_string("Riviere - Defauchy", 0, 12, WHITE_ON_GRAY);
     print_string("Speed:", 0, 32, WHITE_ON_GRAY);
     print_int(speed, 0, 39, WHITE_ON_GRAY);
     if (speed == MAX_SPEED)
@@ -76,6 +76,89 @@ void refresh_screen(int board[MAX_ROW_BOARD][MAX_COL])
     print_board(board);
     put_cursor(&cursor);
     print_up_line();
+}
+
+/**
+ * @brief The left oscillator.
+ * @param board The board of the game.
+ */
+static void left(int board[MAX_ROW_BOARD][MAX_COL])
+{
+    for (int i = 0; i < 6; i++){
+        board[6][9 + i] = 1;
+        board[7][9 + i] = 1;
+    }
+    for (int i = 0; i < 6; i++){
+        board[9 + i][9] = 1;
+        board[9 + i][10] = 1;
+    }
+    for (int i = 0; i < 6; i++) {
+        board[6 + i][16] = 1;
+        board[6 + i][17] = 1;
+    }
+    for (int i = 0; i < 6; i++) {
+        board[13][12 + i] = 1;
+        board[14][12 + i] = 1;
+    }
+}
+
+/**
+ * @brief The right oscillator.
+ * @param board The board of the game.
+ */
+static void right(int board[MAX_ROW_BOARD][MAX_COL])
+{
+    // UP
+        // LEFT
+    for (int i = 0; i < 3; i++)
+        board[6][45 + i] = 1;
+    for (int i = 0; i < 3; i++)
+        board[8 + i][43] = 1;
+    for (int i = 0; i < 3; i++)
+        board[11][45 + i] = 1;
+    for (int i = 0; i < 3; i++)
+        board[8 + i][48] = 1;
+        // RIGHT
+    for (int i = 0; i < 3; i++)
+        board[6][51 + i] = 1;
+    for (int i = 0; i < 3; i++)
+        board[8 + i][55] = 1;
+    for (int i = 0; i < 3; i++)
+        board[11][51 + i] = 1;
+    for (int i = 0; i < 3; i++)
+        board[8 + i][50] = 1;
+
+    // DOWN
+        // LEFT
+    for (int i = 0; i < 3; i++)
+        board[13][45 + i] = 1;
+    for (int i = 0; i < 3; i++)
+        board[14 + i][43] = 1;
+    for (int i = 0; i < 3; i++)
+        board[18][45 + i] = 1;
+    for (int i = 0; i < 3; i++)
+        board[14 + i][48] = 1;
+
+        // RIGHT
+    for (int i = 0; i < 3; i++)
+        board[13][51 + i] = 1;
+    for (int i = 0; i < 3; i++)
+        board[14 + i][55] = 1;
+    for (int i = 0; i < 3; i++)
+        board[18][51 + i] = 1;
+    for (int i = 0; i < 3; i++)
+        board[14+ i][50] = 1;
+}
+
+/**
+ * @brief demo_mode is a function to show for any user what's game of life and
+ * lifeos !
+ * @param board The board of the game.
+ */
+void demo_mode(int board[MAX_ROW_BOARD][MAX_COL])
+{
+    left(board);
+    right(board);
 }
 
 // DEFAUCHY - RIVIERE | 2026

@@ -32,6 +32,7 @@ void kmain(void)
     init_timer(BASE_FREQ);                  // Initialise the ticks (IRQ0) timer at 100Hz
     reset_screen();                         // Put a black screen
     init_board(board);                      // Initalise the board for the GAME OF LIFE
+    demo_mode(board);                       // Put the default configuration
     print_up_line(),                        // Print the upper line (not in the board)
     print_board(board);                     // Print the board
     put_cursor(&cursor);                    // Put the cursor in the middle of the screen
