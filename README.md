@@ -3,6 +3,8 @@ Do you want to play the Game of Life? We've created an OS where you can only pla
 
 We present you: **LifeOS**
 
+<img width="3000" height="4000" alt="20260602_122103" src="https://github.com/user-attachments/assets/a754c672-729c-4b3b-8640-788f4b2194ce" />
+
 ## How to install everything in order to have the tools useful to create the os-image?
 
 First you have to install nasm & qemu & gcc/ld/objcopy for i386 32-bit.\
